@@ -6,4 +6,6 @@ A java application that is used to generate random caverns in the fashion of rog
 
 [Requirements/Määrittelydokumentti](documentation/requirements.md)
 
+### Weekly Progress
 
+[Week 1 progress](progress_reports/Week_1)
