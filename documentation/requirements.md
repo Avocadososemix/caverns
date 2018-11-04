@@ -11,8 +11,8 @@ The Player character is moved using key-strokes, which will require a listener t
 ### Algorithms & Time and Space Complexity
 
 In order to to create random caverns/dungeons, the program will use the following algorithms:  
-* Drunken walk - to create randomly sprawling geometry  
-* Binary space partitioning (BSP tree)- to create rooms  
+* **Drunken walk** - to create randomly sprawling geometry  
+* **Binary space** partitioning (BSP tree)- to create rooms  
 
 
 The time and memory requirements from these algorithms should constrained in a way not make using the program cumbersome. It is hard to specify any Big-O notation that would be specific to these algorithms before they are implemented.
@@ -25,9 +25,9 @@ This program will not necessarily store any data long term in databases, as all 
 
 ### Links
 
-(Binary Space Partition on Wikipedia)[https://en.wikipedia.org/wiki/Binary_space_partitioning]  
-(BSP use in roguelikes)[http://www.roguebasin.com/index.php?title=Basic_BSP_Dungeon_generation]  
+[Binary Space Partition on Wikipedia](https://en.wikipedia.org/wiki/Binary_space_partitioning)  
+[BSP use in roguelikes](http://www.roguebasin.com/index.php?title=Basic_BSP_Dungeon_generation)  
 
-(Drunked Walk on Wikipedia)[https://en.wikipedia.org/wiki/Random_walk]  
-(Drunked Walk)[http://www.roguebasin.com/index.php?title=Random_Walk_Cave_Generation]
+[Drunked Walk on Wikipedia](https://en.wikipedia.org/wiki/Random_walk)  
+[Drunked Walk](http://www.roguebasin.com/index.php?title=Random_Walk_Cave_Generation)
 
