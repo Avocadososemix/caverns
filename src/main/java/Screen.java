@@ -82,7 +82,7 @@ public class Screen extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        start.printLevel();
+        start.printLevelWithCharacters();
     }//GEN-LAST:event_jTextField1ActionPerformed
 
 

@@ -28,7 +28,7 @@ public class Main {
 //        System.out.println(foundChar);
 //        
         //Print Level
-        starter.printLevelBetter();
+        starter.printLevelWithCharacters();
     }
     
 }

@@ -10,9 +10,9 @@
  */
 public class Tile {
     
-    char symbol;
-    String name;
-    boolean passable;
+    private char symbol;
+    private String name;
+    private boolean passable;
     
 
     public Tile(char symbol) {
@@ -20,6 +20,11 @@ public class Tile {
         this.passable = true;
     }
 
+    /**
+     * Returns the ascii-character that represents this tile
+     * 
+     * @return 
+     */
     public char getSymbol() {
         return symbol;
     }
@@ -28,10 +33,20 @@ public class Tile {
         this.symbol = symbol;
     }
 
+    /**
+     * Returns whether the tile can be moved into
+     * 
+     * @return 
+     */
     public boolean isPassable() {
         return passable;
     }
 
+    /**
+     * Set whether a tile can be moved into
+     * 
+     * @param passable 
+     */
     public void setPassable(boolean passable) {
         this.passable = passable;
     }

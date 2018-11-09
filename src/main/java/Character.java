@@ -9,15 +9,14 @@
  * @author lkaranko
  */
 public class Character {
-    
-    char symbol;
-    String position;
-    int posX, posY;
+
+    private char symbol;
+    private Coordinates position;
 
     public Character() {
         this.symbol = '@';
     }
-    
+
     public Character(char symbol) {
         this.symbol = symbol;
     }
@@ -29,19 +28,30 @@ public class Character {
     public void setSymbol(char symbol) {
         this.symbol = symbol;
     }
-    
-    public String getPosition() {
-       return position; 
+
+    public Coordinates getPosition() {
+        return position;
+    }
+    /**
+     * Teleports the character to the position
+     * 
+     * @param posX
+     * @param posY 
+     */
+    public void setPosition(int posX, int posY) {
+        position.setCoordX(posX);
+        position.setCoordY(posY);
     }
 
-    public void setPosition(int posX, int posY) {
-        this.posX = posX;
-        this.posY = posY;
-    }
-    
+    /**
+     * Moves the character to a new position based on a move vector
+     * 
+     * @param posX
+     * @param posY 
+     */
     public void movePosition(int posX, int posY) {
-        this.posX += posX;
-        this.posY += posY;
+        position.setCoordX(position.getCoordX() + posX);
+        position.setCoordY(position.getCoordY() + posY);
     }
-    
+
 }
