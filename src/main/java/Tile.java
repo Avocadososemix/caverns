@@ -17,6 +17,7 @@ public class Tile {
 
     public Tile(char symbol) {
         this.symbol = symbol;
+        this.passable = true;
     }
 
     public char getSymbol() {
@@ -25,6 +26,14 @@ public class Tile {
 
     public void setSymbol(char symbol) {
         this.symbol = symbol;
+    }
+
+    public boolean isPassable() {
+        return passable;
+    }
+
+    public void setPassable(boolean passable) {
+        this.passable = passable;
     }
     
     

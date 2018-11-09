@@ -19,14 +19,16 @@ public class Main {
         starter.setWall(2, 2);
         starter.setWall(2, 3);
         
+//        Testing JPanel view        
+//        Screen window = new Screen();
+        
         
 //        //Check individual tile
 //        char foundChar = starter.getLevelTile(2, 2);
 //        System.out.println(foundChar);
 //        
         //Print Level
-        starter.printLevel();
-       // starter.printLevel();
+        starter.printLevelBetter();
     }
     
 }

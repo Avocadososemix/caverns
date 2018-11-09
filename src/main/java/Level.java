@@ -1,3 +1,6 @@
+
+import java.util.HashMap;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,6 +15,7 @@ public class Level {
     
     public int sizeX, sizeY;
     public Tile[][] tiles;
+    public HashMap<Integer[][], Character> characters = new HashMap<Integer[][], Character>();
     
     public Level(int sizeX, int sizeY) {
         this.sizeX = sizeX;
@@ -37,6 +41,10 @@ public class Level {
     
     public void setWall(int coordX, int coordY) {
         tiles[coordX][coordY].setSymbol('#');
+        tiles[coordX][coordY].setPassable(false);
+    }
+    
+    public void moveCharacter(String direction) {
         
     }
     
@@ -51,6 +59,17 @@ public class Level {
             }
             System.out.println("");
         }
+    }
+    
+    public void printLevelBetter() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < sizeY; i++) {
+            for (int j = 0; j < sizeX; j++) {
+            sb.append(tiles[i][j].symbol);
+            }
+            sb.append('\n');
+        }
+        System.out.println(sb);
     }
     
 }
