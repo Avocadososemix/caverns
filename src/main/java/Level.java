@@ -112,7 +112,7 @@ public class Level {
         for (int j = 0; j < sizeY; j++) {
             for (int i = 0; i < sizeX; i++) {
                 tilesWithCharacters[i][j] = (tiles[i][j].getSymbol());
-                System.out.println("Array length: " + tilesWithCharacters.length);
+                //System.out.println("Array length: " + tilesWithCharacters.length);
                 System.out.println("X is " + i + " and Y is " + j + ". Max size:" + sizeX + ", "+ sizeY);
             }
         }
