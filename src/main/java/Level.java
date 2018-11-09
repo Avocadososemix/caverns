@@ -1,4 +1,6 @@
 
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 /*
@@ -6,10 +8,9 @@ import java.util.ArrayList;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  * This class will hold the level building logic.
- * 
+ *
  * @author lkaranko
  */
 public class Level {
@@ -17,12 +18,12 @@ public class Level {
     public int sizeX, sizeY;
     public Tile[][] tiles;
     public ArrayList<Character> mapObjects = new ArrayList();
-    public ArrayList<String> errorLog = new ArrayList<>();
+    public ArrayList<String> errorLog = new ArrayList<>(); //Can be printed to receive errors with timestamps
 
     public Level(int sizeX, int sizeY) {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
-        this.tiles = new Tile[sizeY][sizeX];
+        this.tiles = new Tile[sizeX][sizeY];
     }
 
     public int getSizeX() {
@@ -39,16 +40,16 @@ public class Level {
     public void initializeLevel() {
         for (int i = 0; i < sizeY; i++) {
             for (int j = 0; j < sizeX; j++) {
-                tiles[i][j] = new Tile('.');
+                tiles[j][i] = new Tile('.');
             }
         }
     }
 
     /**
      * Changes a map tile into a wall tile that is impassable
-     * 
+     *
      * @param coordX
-     * @param coordY 
+     * @param coordY
      */
     public void setWall(int coordX, int coordY) {
         tiles[coordX][coordY].setSymbol('#');
@@ -57,10 +58,10 @@ public class Level {
 
     /**
      * Moves a character object on the map
-     * 
+     *
      * @param character
      * @param moveX
-     * @param moveY 
+     * @param moveY
      */
     public void moveCharacter(Character character, int moveX, int moveY) {
 
@@ -71,14 +72,14 @@ public class Level {
             character.movePosition(moveX, moveY);
         } else {
             System.out.println("Can't move there");
-            errorLog.add("Could not move there");
+            errorLog.add("Could not move there" + Time.valueOf(LocalTime.MIN));
         }
     }
 
     /**
      * Adds a character object to the current map
-     * 
-     * @param player 
+     *
+     * @param player
      */
     public void addCharacter(Character player) {
         mapObjects.add(player);
@@ -113,18 +114,19 @@ public class Level {
             for (int i = 0; i < sizeX; i++) {
                 tilesWithCharacters[i][j] = (tiles[i][j].getSymbol());
                 //System.out.println("Array length: " + tilesWithCharacters.length);
-                System.out.println("X is " + i + " and Y is " + j + ". Max size:" + sizeX + ", "+ sizeY);
+                //System.out.println("X is " + i + " and Y is " + j + ". Max size:" + sizeX + ", "+ sizeY);
             }
         }
         //adding characters to map
         mapObjects.forEach((character) -> {
+            System.out.println("Player: " + character.getSymbol() + "\n");
             tilesWithCharacters[character.getPosition().getCoordX()][character.getPosition().getCoordY()] = character.getSymbol();
         });
         //creating a printable version of the map with both tiles and characters
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < sizeY; i++) {
             for (int j = 0; j < sizeX; j++) {
-                sb.append(tiles[i][j].getSymbol());
+                sb.append(tilesWithCharacters[j][i]);
             }
             sb.append('\n');
         }

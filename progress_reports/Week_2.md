@@ -4,14 +4,14 @@ The week started with massive problems, I had never really made a gradle-project
 
 After the initial troubles had passed, programming could start in earnest. Initially a quick mock-up of the final map data-structure was made using a Level-object, which had embedded tile object for each tile available on the map. Tiles are represented using ascii characters. Different tiles can be given different properties. A fast and dirty way to look at the prelimanary version of the map was added as well.
 
-Improved printing out map. Presenting characters on map has been difficult, ran into some trouble with arrays, which will hopefully be fixed.
+Improved printing out map. Presenting characters on map has been difficult, ran into some trouble with arrays, which was fixed in the end. The program can now show the map as well as print the characer on the map.
 
-So far, this week around 9-10 hours were spent on the program.
+So far, this week around 10-11 hours were spent on the program.
 
 
 ## Problem with adding tests
 
-Hardly any of the current classses are in any way final, and what works is at such a rudimentary level that making tests for these classes would be a waste of time. I wish I had spent more time on the project this week, but work, sickness and other coursework have limited the time that I've been able to spend on this.
+Hardly any of the current classses are in any way final. Sadly, I ran out of time to create tests for the map printing, which is the most finished feature in the program. I wish I had spent more time on the project this week, but work, sickness and other coursework have limited the time that I've been able to spend on this.
 
 ## Javadoc
 

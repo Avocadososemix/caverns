@@ -40,4 +40,9 @@ public class Coordinates {
     public void setCoordY(int coordY) {
         this.coordY = coordY;
     }
+    
+    public void setCoordXY(int coordX, int coordY) {
+        this.coordX = coordX;
+        this.coordY = coordY;
+    }
 }
