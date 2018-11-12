@@ -65,8 +65,8 @@ public class Level {
      */
     public void moveCharacter(Character character, int moveX, int moveY) {
 
-        if (character.getPosition().getCoordX() + moveX <= sizeX
-                && character.getPosition().getCoordY() + moveY <= sizeY
+        if (character.getPosition().getCoordX() + moveX < sizeX
+                && character.getPosition().getCoordY() + moveY < sizeY
                 && character.getPosition().getCoordX() + moveX >= 0
                 && character.getPosition().getCoordY() + moveY >= 0) {
             character.movePosition(moveX, moveY);
@@ -74,6 +74,25 @@ public class Level {
             System.out.println("Can't move there");
             errorLog.add("Could not move there" + Time.valueOf(LocalTime.MIN));
         }
+    }
+    
+    public void moveDirection(String direction, Character character) {
+        if (direction.trim().equalsIgnoreCase("n")) {
+            moveCharacter(character, 0, -1);
+        } else if (direction.trim().equalsIgnoreCase("e")) {
+            moveCharacter(character, 1, 0);
+        } else if (direction.trim().equalsIgnoreCase("s")) {
+            moveCharacter(character, 0, 1);
+        } else if (direction.trim().equalsIgnoreCase("w")) {
+            moveCharacter(character, -1, 0);
+        } else {
+            errorLog.add("Did not receive valid move command" + Time.valueOf(LocalTime.MIN));
+            System.out.println("That's not a valid move.");
+        }
+    }
+    
+    public boolean tilePassable(Tile tile) {
+        return tile.getPassable();
     }
 
     /**
@@ -131,6 +150,10 @@ public class Level {
             sb.append('\n');
         }
         System.out.println(sb);
+    }
+    
+    public ArrayList<String> returnErrorLog() {
+        return errorLog;
     }
 
 }

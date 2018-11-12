@@ -38,7 +38,7 @@ public class Tile {
      * 
      * @return 
      */
-    public boolean isPassable() {
+    public boolean getPassable() {
         return passable;
     }
 

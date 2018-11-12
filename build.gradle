@@ -17,6 +17,10 @@ if (!hasProperty('mainClass')) {
     ext.mainClass = ''
 }
 
+run{
+    standardInput = System.in
+}
+
 repositories {
     mavenCentral()
     // You may define additional repositories, or even remove "mavenCentral()".
