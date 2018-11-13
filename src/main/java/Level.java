@@ -68,15 +68,22 @@ public class Level {
         if (character.getPosition().getCoordX() + moveX < sizeX
                 && character.getPosition().getCoordY() + moveY < sizeY
                 && character.getPosition().getCoordX() + moveX >= 0
-                && character.getPosition().getCoordY() + moveY >= 0) {
+                && character.getPosition().getCoordY() + moveY >= 0
+                && directionPassable(character, moveX, moveY)) {
             character.movePosition(moveX, moveY);
         } else {
-            System.out.println("Can't move there");
+            System.out.println("You are blocked from moving there ");
             errorLog.add("Could not move there" + Time.valueOf(LocalTime.MIN));
         }
     }
-    
-    public void moveDirection(String direction, Character character) {
+
+    public boolean directionPassable(Character character, int moveX, int moveY) {
+        int moveLocationX = character.getPosition().getCoordX() + moveX;
+        int moveLocationY = character.getPosition().getCoordY() + moveY;
+        return tiles[moveLocationX][moveLocationY].getPassable();
+    }
+
+    public void moveCommand(String direction, Character character) {
         if (direction.trim().equalsIgnoreCase("n")) {
             moveCharacter(character, 0, -1);
         } else if (direction.trim().equalsIgnoreCase("e")) {
@@ -90,7 +97,7 @@ public class Level {
             System.out.println("That's not a valid move.");
         }
     }
-    
+
     public boolean tilePassable(Tile tile) {
         return tile.getPassable();
     }
@@ -138,7 +145,7 @@ public class Level {
         }
         //adding characters to map
         mapObjects.forEach((character) -> {
-            System.out.println("Player: " + character.getSymbol() + "\n");
+            //System.out.println("Player: " + character.getSymbol() + "\n");
             tilesWithCharacters[character.getPosition().getCoordX()][character.getPosition().getCoordY()] = character.getSymbol();
         });
         //creating a printable version of the map with both tiles and characters
@@ -151,7 +158,7 @@ public class Level {
         }
         System.out.println(sb);
     }
-    
+
     public ArrayList<String> returnErrorLog() {
         return errorLog;
     }

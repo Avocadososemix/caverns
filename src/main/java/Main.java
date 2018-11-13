@@ -37,13 +37,13 @@ public class Main {
         String input = "";
         while (true) {
             starter.printLevelWithCharacters();
-            System.out.print("Select direction to move: ");
+            System.out.println("Select direction to move: ");
             input = scan.nextLine();
             if (input.trim().contains("end")) {
                 System.out.println("Bye!");
                 break;
             }
-            starter.moveDirection(input, player);
+            starter.moveCommand(input, player);
         }
     }
     
