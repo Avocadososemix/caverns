@@ -14,6 +14,8 @@ I've had a lot of trouble with adding tests through gradle. I've tried to implem
 
 UPDATE: I had changed my build.gradle file in a way that wasn't supported in my netbeans version's gradle. I used an older version of the project to find a build.gradle file that was more intact and works. I can write tests now.
 
+UPDATE: Wrote all the tests, but this is technically something that happened on week 4.
+
 ## The random walk algorithm
 
 After reading about the random walk algorithm on wikipedia, I implemented a version of the algorithm that suits my needs. It will have to be refined more, but the current implementation works well. The next map generation algorithm to be added is the binary space partitioning algorithm. I hope to make both algorithms work side-by-side to generate room structures in the caverns.
