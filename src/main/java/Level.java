@@ -54,23 +54,41 @@ public class Level {
         }
     }
     
+    /**
+     * The randomwalk algorithm generates a cavern on the map. The algorithm 
+     * starts from the middle of the level, and every loop cycle selects a
+     * random direction to "walk to". Whenever the algorithm walks in a 
+     * direction, it sets the terrain type of that tile into a passable tile. 
+     * When the algorithm reaches an edge of the level, it has run to completion.
+     * The algorithm uses the proportions of the map to choose create caverns
+     * that have an equal chance to expand to all sides of the level regardless
+     * of the distance from the center of the level to any side.
+     */
     public void randomWalk() {
         int middleX = sizeX/2;
         int middleY = sizeY/2;
+        System.out.printf("Size X: %d Size Y: %d\n", sizeX, sizeY );
+        double proportionalSizeX = (sizeX/(sizeX+sizeY*1.0));
+        System.out.println(proportionalSizeX);
         setEmpty(middleX, middleY);
-        while (middleX != sizeX-1 && middleX != 0 && middleY != sizeY-1 && middleY != 0) {
+        while(true) {
+        //while (middleX != sizeX-1 && middleX != 0 && middleY != sizeY-1 && middleY != 0) {
             double random = Math.random();
-            if (random < 0.25) {
+            if (random < proportionalSizeX/2) {
                 middleX++;
+                if (middleX>sizeX-1) break;
                 setEmpty(middleX, middleY);
-            } else if (random < 0.50) {
+            } else if (random < proportionalSizeX) {
                 middleX--;
+                if (middleX<0) break;
                 setEmpty(middleX, middleY);
-            } else if (random < 0.75) {
+            } else if (random < (1-(1-proportionalSizeX)/2)) {
                 middleY++;
+                if (middleY>sizeY-1) break;
                 setEmpty(middleX, middleY);
             } else {
                 middleY--;
+                if (middleX<0) break;
                 setEmpty(middleX, middleY);
             }
         }
