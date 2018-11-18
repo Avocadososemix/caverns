@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * and open the template in the editor.
  */
 /**
- * This class will hold the level building logic.
+ * This class contains the level building logic.
  *
  * @author lkaranko
  */
@@ -45,6 +45,10 @@ public class Level {
         }
     }
     
+    /**
+     * This method fills the map with walls, so that a cavern can be generated
+     * by removing wall tiles from the map.
+     */
     public void fillWithWalls() {
         for (int i = 0; i < sizeY; i++) {
             for (int j = 0; j < sizeX; j++) {
@@ -88,7 +92,7 @@ public class Level {
                 setEmpty(middleX, middleY);
             } else {
                 middleY--;
-                if (middleX<0) break;
+                if (middleY<0) break;
                 setEmpty(middleX, middleY);
             }
         }
@@ -105,6 +109,12 @@ public class Level {
         tiles[coordX][coordY].setPassable(false);
     }
     
+    /**
+     * Changes a map tile into an empty tile that is passable.
+     * 
+     * @param coordX
+     * @param coordY 
+     */
     public void setEmpty(int coordX, int coordY) {
         //System.out.println("Setting square " + coordX + ", " + coordY + " empty. Max is " + sizeX + ", " +sizeY);
         tiles[coordX][coordY].setSymbol('.');
@@ -132,12 +142,27 @@ public class Level {
         }
     }
 
+    /**
+     * Checks whether the direction is passable for the character.
+     * 
+     * @param character
+     * @param moveX
+     * @param moveY
+     * @return 
+     */
     public boolean directionPassable(Character character, int moveX, int moveY) {
         int moveLocationX = character.getPosition().getCoordX() + moveX;
         int moveLocationY = character.getPosition().getCoordY() + moveY;
         return tiles[moveLocationX][moveLocationY].getPassable();
     }
 
+    /**
+     * Parses the move commands given to it, and calls a movement method using
+     * the cardinal direction given to it.
+     * 
+     * @param direction
+     * @param character 
+     */
     public void moveCommand(String direction, Character character) {
         if (direction.trim().equalsIgnoreCase("n")) {
             moveCharacter(character, 0, -1);
@@ -153,10 +178,6 @@ public class Level {
         }
     }
 
-    public boolean tilePassable(Tile tile) {
-        return tile.getPassable();
-    }
-
     /**
      * Adds a character object to the current map
      *
@@ -166,6 +187,13 @@ public class Level {
         mapObjects.add(player);
     }
 
+    /**
+     * Returns the tile symbol at the requested location.
+     * 
+     * @param coordX
+     * @param coordY
+     * @return 
+     */
     public char getLevelTile(int coordX, int coordY) {
         return tiles[coordX][coordY].getSymbol();
     }
@@ -184,7 +212,6 @@ public class Level {
         System.out.println(sb);
     }
 
-    //TODO Fix this messy code
     /**
      * Prints out the current level with all map objects
      */
@@ -194,13 +221,10 @@ public class Level {
         for (int j = 0; j < sizeY; j++) {
             for (int i = 0; i < sizeX; i++) {
                 tilesWithCharacters[i][j] = (tiles[i][j].getSymbol());
-                //System.out.println("Array length: " + tilesWithCharacters.length);
-                //System.out.println("X is " + i + " and Y is " + j + ". Max size:" + sizeX + ", "+ sizeY);
             }
         }
         //adding characters to map
         mapObjects.forEach((character) -> {
-            //System.out.println("Player: " + character.getSymbol() + "\n");
             tilesWithCharacters[character.getPosition().getCoordX()][character.getPosition().getCoordY()] = character.getSymbol();
         });
         //creating a printable version of the map with both tiles and characters
@@ -214,6 +238,11 @@ public class Level {
         System.out.println(sb);
     }
 
+    /**
+     * Returns the error log list object.
+     * 
+     * @return 
+     */
     public ArrayList<String> returnErrorLog() {
         return errorLog;
     }

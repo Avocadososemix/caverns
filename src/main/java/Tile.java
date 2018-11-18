@@ -5,6 +5,9 @@
  */
 
 /**
+ * The Tile class contains the symbols and names of a tile, and contains
+ * the special properties of a tile, such as if it can be passed through by
+ * characters
  *
  * @author lkaranko
  */

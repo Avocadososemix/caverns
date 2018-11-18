@@ -5,7 +5,9 @@
  */
 
 /**
- *
+ * The character class contains all information pertaining to characters on the
+ * level map
+ * 
  * @author lkaranko
  */
 public class Character {
