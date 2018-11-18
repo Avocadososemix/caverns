@@ -44,6 +44,37 @@ public class Level {
             }
         }
     }
+    
+    public void fillWithWalls() {
+        for (int i = 0; i < sizeY; i++) {
+            for (int j = 0; j < sizeX; j++) {
+                tiles[j][i] = new Tile('#');
+                tiles[j][i].setPassable(false);
+            }
+        }
+    }
+    
+    public void randomWalk() {
+        int middleX = sizeX/2;
+        int middleY = sizeY/2;
+        setEmpty(middleX, middleY);
+        while (middleX != sizeX-1 && middleX != 0 && middleY != sizeY-1 && middleY != 0) {
+            double random = Math.random();
+            if (random < 0.25) {
+                middleX++;
+                setEmpty(middleX, middleY);
+            } else if (random < 0.50) {
+                middleX--;
+                setEmpty(middleX, middleY);
+            } else if (random < 0.75) {
+                middleY++;
+                setEmpty(middleX, middleY);
+            } else {
+                middleY--;
+                setEmpty(middleX, middleY);
+            }
+        }
+    }
 
     /**
      * Changes a map tile into a wall tile that is impassable
@@ -54,6 +85,12 @@ public class Level {
     public void setWall(int coordX, int coordY) {
         tiles[coordX][coordY].setSymbol('#');
         tiles[coordX][coordY].setPassable(false);
+    }
+    
+    public void setEmpty(int coordX, int coordY) {
+        //System.out.println("Setting square " + coordX + ", " + coordY + " empty. Max is " + sizeX + ", " +sizeY);
+        tiles[coordX][coordY].setSymbol('.');
+        tiles[coordX][coordY].setPassable(true);
     }
 
     /**

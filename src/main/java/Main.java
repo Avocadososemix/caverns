@@ -14,17 +14,21 @@ public class Main {
     
     public static void main(String[] args) {
         System.out.println("Welcome to level 1");
-        Level starter = new Level(30, 6); //creating a new level
-        starter.initializeLevel(); //filling level with empty tiles
+        Level starter = new Level(80, 30); //creating a new level
+        //starter.initializeLevel(); //filling level with empty tiles
+        starter.fillWithWalls(); //filling level with walls
+        starter.randomWalk(); //creating a random cavern
+        starter.randomWalk(); //creating a random cavern
+        starter.randomWalk(); //creating a random cavern
         System.out.println("");
         
         Character player = new Character();
-        player.setPosition(4, 4);
+        player.setPosition(40, 15);
         starter.addCharacter(player); //adding the player character to the level
 
         //Testing adding a few walls
-        starter.setWall(2, 2);
-        starter.setWall(2, 3);
+        //starter.setWall(2, 2);
+        //starter.setWall(2, 3);
 
 //        Testing JPanel view, later program will be run in the panel
 //        Screen window = new Screen();
