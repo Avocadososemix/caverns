@@ -10,7 +10,9 @@ I've gone through all the javadoc in the project, and updated all the non-setter
 
 ## problems with adding tests again
 
-I've had a lot of trouble with adding tests through gradle. I've tried to implement junit 5 with the new version of gradle, but something is always broken. I will have to consult someone more experienced to fix my gradle file.
+I've had a lot of trouble with adding tests through gradle. I've tried to implement junit 5 with the new version of gradle, but something is always broken. I will have to consult someone more experienced to fix my gradle file.  
+
+UPDATE: I had changed my build.gradle file in a way that wasn't supported in my netbeans version's gradle. I used an older version of the project to find a build.gradle file that was more intact and works. I can write tests now.
 
 ## The random walk algorithm
 

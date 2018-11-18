@@ -66,7 +66,7 @@ public class Level {
      * When the algorithm reaches an edge of the level, it has run to completion.
      * The algorithm uses the proportions of the map to choose create caverns
      * that have an equal chance to expand to all sides of the level regardless
-     * of the distance from the center of the level to any side.
+     * of the distance from the centre of the level to any side.
      */
     public void randomWalk() {
         int middleX = sizeX/2;
