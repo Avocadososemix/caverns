@@ -4,6 +4,10 @@ This week started with adding player movement to the build. The biggest problem 
 
 One of the core algorithms that build the randomly generated level was also added. The random walk (also known as the drunken walk) algorithm is used to create an erratic pattern that criss-crosses the level map. Certains constraints were also added to the algorithm. It will use the proportional size of the level to choose its walking direction instead of selecting it purely randomly. This way caverns will use more of the space provided to them on the map. Running the algorithm several times on the same map will generate more exits. In the future, I will refine the algorithm more.
 
+## even more javadoc
+
+I've gone through all the javadoc in the project, and updated all the non-setter/getter methods to have this.
+
 ## problems with adding tests again
 
 I've had a lot of trouble with adding tests through gradle. I've tried to implement junit 5 with the new version of gradle, but something is always broken. I will have to consult someone more experienced to fix my gradle file.
