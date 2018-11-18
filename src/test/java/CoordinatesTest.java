@@ -17,6 +17,8 @@ import static org.junit.Assert.*;
  */
 public class CoordinatesTest {
     
+    private Coordinates testInstance;
+    
     public CoordinatesTest() {
     }
     
@@ -30,6 +32,7 @@ public class CoordinatesTest {
     
     @Before
     public void setUp() {
+        testInstance = new Coordinates(3,4);
     }
     
     @After
@@ -42,12 +45,9 @@ public class CoordinatesTest {
     @Test
     public void testGetCoordX() {
         System.out.println("getCoordX");
-        Coordinates instance = null;
-        int expResult = 0;
-        int result = instance.getCoordX();
+        int expResult = 3;
+        int result = testInstance.getCoordX();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -57,10 +57,8 @@ public class CoordinatesTest {
     public void testSetCoordX() {
         System.out.println("setCoordX");
         int coordX = 0;
-        Coordinates instance = null;
-        instance.setCoordX(coordX);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        testInstance.setCoordX(coordX);
+        assertEquals(coordX, testInstance.getCoordX());
     }
 
     /**
@@ -69,12 +67,9 @@ public class CoordinatesTest {
     @Test
     public void testGetCoordY() {
         System.out.println("getCoordY");
-        Coordinates instance = null;
-        int expResult = 0;
-        int result = instance.getCoordY();
+        int expResult = 4;
+        int result = testInstance.getCoordY();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -84,10 +79,8 @@ public class CoordinatesTest {
     public void testSetCoordY() {
         System.out.println("setCoordY");
         int coordY = 0;
-        Coordinates instance = null;
-        instance.setCoordY(coordY);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        testInstance.setCoordY(coordY);
+        assertEquals(coordY, testInstance.getCoordY());
     }
 
     /**
@@ -96,12 +89,11 @@ public class CoordinatesTest {
     @Test
     public void testSetCoordXY() {
         System.out.println("setCoordXY");
-        int coordX = 0;
-        int coordY = 0;
-        Coordinates instance = null;
-        instance.setCoordXY(coordX, coordY);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int coordX = 5;
+        int coordY = 6;
+        testInstance.setCoordXY(coordX, coordY);
+        assertEquals(coordX, testInstance.getCoordX());
+        assertEquals(coordY, testInstance.getCoordY());
     }
     
 }

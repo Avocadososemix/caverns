@@ -194,8 +194,8 @@ public class Level {
      * @param coordY
      * @return 
      */
-    public char getLevelTile(int coordX, int coordY) {
-        return tiles[coordX][coordY].getSymbol();
+    public Tile getLevelTile(int coordX, int coordY) {
+        return tiles[coordX][coordY];
     }
 
     /**

@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -18,6 +20,10 @@ import static org.junit.Assert.*;
  */
 public class LevelTest {
     
+    private Level miniLevel;
+    private int sizeX, sizeY;
+    private Tile[][] tiles;
+    
     public LevelTest() {
     }
     
@@ -31,8 +37,9 @@ public class LevelTest {
     
     @Before
     public void setUp() {
-        int sizeX = 30;
-        int sizeY = 50;
+        sizeX = 30;
+        sizeY = 50;
+        miniLevel = new Level(30, 50);
     }
     
     @After
@@ -45,12 +52,9 @@ public class LevelTest {
     @Test
     public void testGetSizeX() {
         System.out.println("getSizeX");
-        Level instance = null;
-        int expResult = 0;
-        int result = instance.getSizeX();
+        int expResult = 30;
+        int result = miniLevel.getSizeX();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -59,12 +63,9 @@ public class LevelTest {
     @Test
     public void testGetSizeY() {
         System.out.println("getSizeY");
-        Level instance = null;
-        int expResult = 0;
-        int result = instance.getSizeY();
+        int expResult = 50;
+        int result = miniLevel.getSizeY();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -73,10 +74,14 @@ public class LevelTest {
     @Test
     public void testInitializeLevel() {
         System.out.println("initializeLevel");
-        Level instance = null;
-        instance.initializeLevel();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        miniLevel.initializeLevel();
+        for (int i = 0; i < sizeY; i++) {
+            for (int j = 0; j < sizeX; j++) {
+                if (miniLevel.tiles[j][i].getSymbol() != '.') {
+                    fail();
+                }
+            }
+        }
     }
 
     /**
@@ -85,22 +90,30 @@ public class LevelTest {
     @Test
     public void testFillWithWalls() {
         System.out.println("fillWithWalls");
-        Level instance = null;
-        instance.fillWithWalls();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        miniLevel.fillWithWalls();
+        for (int i = 0; i < sizeY; i++) {
+            for (int j = 0; j < sizeX; j++) {
+                if (miniLevel.tiles[j][i].getSymbol() != '#') {
+                    fail();
+                }
+            }
+        }
     }
 
     /**
-     * Test of randomWalk method, of class Level.
+     * Test of randomWalk method, of class Level. This needs more work.
      */
     @Test
     public void testRandomWalk() {
         System.out.println("randomWalk");
-        Level instance = null;
-        instance.randomWalk();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        miniLevel.randomWalk();
+        for (int i = 0; i < sizeY; i++) {
+            for (int j = 0; j < sizeX; j++) {
+                if (miniLevel.tiles[j][i].getSymbol() != '.') {
+                    assertTrue(true);
+                }
+            }
+        }
     }
 
     /**
@@ -109,12 +122,12 @@ public class LevelTest {
     @Test
     public void testSetWall() {
         System.out.println("setWall");
-        int coordX = 0;
-        int coordY = 0;
-        Level instance = null;
-        instance.setWall(coordX, coordY);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int coordX = 1;
+        int coordY = 2;
+        miniLevel.initializeLevel();
+        miniLevel.setWall(coordX, coordY);
+        char symbol = '#';
+        assertTrue(miniLevel.getLevelTile(coordX, coordY).getSymbol() == symbol);
     }
 
     /**
@@ -123,12 +136,12 @@ public class LevelTest {
     @Test
     public void testSetEmpty() {
         System.out.println("setEmpty");
-        int coordX = 0;
-        int coordY = 0;
-        Level instance = null;
-        instance.setEmpty(coordX, coordY);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int coordX = 1;
+        int coordY = 2;
+        miniLevel.fillWithWalls();
+        miniLevel.setEmpty(coordX, coordY);
+        char symbol = '.';
+        assertTrue(miniLevel.getLevelTile(coordX, coordY).getSymbol() == symbol);
     }
 
     /**
@@ -137,13 +150,14 @@ public class LevelTest {
     @Test
     public void testMoveCharacter() {
         System.out.println("moveCharacter");
-        Character character = null;
-        int moveX = 0;
-        int moveY = 0;
-        Level instance = null;
-        instance.moveCharacter(character, moveX, moveY);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Character player = new Character(0,0);
+        miniLevel.addCharacter(player);
+        miniLevel.initializeLevel();
+        int moveX = 1;
+        int moveY = 2;
+        miniLevel.moveCharacter(player, moveX, moveY);
+        assertTrue(player.getPosition().getCoordX() == 0+moveX);
+        assertTrue(player.getPosition().getCoordY() == 0+moveY);
     }
 
     /**
@@ -152,15 +166,15 @@ public class LevelTest {
     @Test
     public void testDirectionPassable() {
         System.out.println("directionPassable");
-        Character character = null;
-        int moveX = 0;
-        int moveY = 0;
-        Level instance = null;
-        boolean expResult = false;
-        boolean result = instance.directionPassable(character, moveX, moveY);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Character testPlayer = new Character(0,0);
+        miniLevel.fillWithWalls();
+        int moveX = 1, moveY = 1;
+        boolean result = miniLevel.directionPassable(testPlayer, moveX, moveY);
+        assertEquals(false, result);
+        miniLevel.setEmpty(1,1);
+        result = miniLevel.directionPassable(testPlayer, moveX, moveY);
+        assertEquals(true, result);
+        
     }
 
     /**
@@ -169,12 +183,16 @@ public class LevelTest {
     @Test
     public void testMoveCommand() {
         System.out.println("moveCommand");
-        String direction = "";
-        Character character = null;
-        Level instance = null;
-        instance.moveCommand(direction, character);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String[] directions = {"n","e","s","w"};
+        int[] resultsX = {1,2,2,1};
+        int[] resultsY = {1,1,2,2};
+        Character testPlayer = new Character(1,2);
+        miniLevel.initializeLevel();
+        for (int i = 0; i < directions.length; i++) {
+            miniLevel.moveCommand(directions[i], testPlayer);
+            assertTrue(testPlayer.getPosition().getCoordX() == resultsX[i]);
+            assertTrue(testPlayer.getPosition().getCoordY() == resultsY[i]);
+        }
     }
 
     /**
@@ -183,11 +201,10 @@ public class LevelTest {
     @Test
     public void testAddCharacter() {
         System.out.println("addCharacter");
-        Character player = null;
-        Level instance = null;
-        instance.addCharacter(player);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Character testPlayer = new Character(0,0);
+        assertTrue(miniLevel.mapObjects.isEmpty());
+        miniLevel.addCharacter(testPlayer);
+        assertTrue(!miniLevel.mapObjects.isEmpty());
     }
 
     /**
@@ -196,14 +213,14 @@ public class LevelTest {
     @Test
     public void testGetLevelTile() {
         System.out.println("getLevelTile");
-        int coordX = 0;
-        int coordY = 0;
-        Level instance = null;
-        char expResult = ' ';
-        char result = instance.getLevelTile(coordX, coordY);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        miniLevel.fillWithWalls();
+        int coordX = 3;
+        int coordY = 3;
+        char expResult = '#';
+        Tile result = miniLevel.getLevelTile(coordX, coordY);
+        assertEquals(expResult, result.getSymbol());
+        miniLevel.setEmpty(coordX, coordY);
+        assertEquals('.', result.getSymbol());
     }
 
     /**
@@ -212,10 +229,16 @@ public class LevelTest {
     @Test
     public void testPrintLevel() {
         System.out.println("printLevel");
-        Level instance = null;
-        instance.printLevel();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        PrintStream oldOut = System.out;
+        System.setOut(new PrintStream(outContent));
+        Level miniLevel = new Level(0,0);
+        miniLevel.initializeLevel();
+        //miniLevel.setWall(3, 4);
+        //iniLevel.setWall(14, 10);
+        miniLevel.printLevel();
+        System.setOut(oldOut);
+        assertEquals(".", outContent.toString());
     }
 
     /**
