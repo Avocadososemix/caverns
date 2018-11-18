@@ -42,12 +42,13 @@ public class CharacterTest {
     @Test
     public void testGetSymbol() {
         System.out.println("getSymbol");
-        Character instance = new Character();
-        char expResult = ' ';
-        char result = instance.getSymbol();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Character testChar1 = new Character();
+        Character testChar2 = new Character('@', 1, 2);
+        char expResult = '@';
+        char result1 = testChar1.getSymbol();
+        char result2 = testChar2.getSymbol();
+        assertEquals(expResult, result1);
+        assertEquals(expResult, result2);
     }
 
     /**
@@ -56,11 +57,10 @@ public class CharacterTest {
     @Test
     public void testSetSymbol() {
         System.out.println("setSymbol");
-        char symbol = ' ';
-        Character instance = new Character();
-        instance.setSymbol(symbol);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        char symbol = 'K';
+        Character testCharacter = new Character(symbol, 1, 2);
+        testCharacter.setSymbol(symbol);
+        assertEquals(symbol, testCharacter.getSymbol());
     }
 
     /**
@@ -69,12 +69,14 @@ public class CharacterTest {
     @Test
     public void testGetPosition() {
         System.out.println("getPosition");
-        Character instance = new Character();
-        Coordinates expResult = null;
-        Coordinates result = instance.getPosition();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Character testCharacter1 = new Character();
+        Character testCharacter2 = new Character(3,4);
+        Coordinates expResult1 = new Coordinates(0,0);
+        Coordinates expResult2 = new Coordinates(3,4);
+        assertEquals(expResult1.getCoordX(), (testCharacter1.getPosition().getCoordX()));
+        assertEquals(expResult1.getCoordY(), (testCharacter1.getPosition().getCoordY()));
+        assertEquals(expResult2.getCoordX(), (testCharacter2.getPosition().getCoordX()));
+        assertEquals(expResult2.getCoordY(), (testCharacter2.getPosition().getCoordY()));
     }
 
     /**
@@ -83,12 +85,13 @@ public class CharacterTest {
     @Test
     public void testSetPosition() {
         System.out.println("setPosition");
-        int posX = 0;
-        int posY = 0;
-        Character instance = new Character();
-        instance.setPosition(posX, posY);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int posX = 5;
+        int posY = 3;
+        Coordinates coord = new Coordinates(posX, posY);
+        Character testCharacter = new Character();
+        testCharacter.setPosition(posX, posY);
+        assertEquals(coord.getCoordX(), testCharacter.getPosition().getCoordX());
+        assertEquals(coord.getCoordY(), testCharacter.getPosition().getCoordY());
     }
 
     /**
@@ -97,12 +100,13 @@ public class CharacterTest {
     @Test
     public void testMovePosition() {
         System.out.println("movePosition");
-        int posX = 0;
-        int posY = 0;
-        Character instance = new Character();
-        instance.movePosition(posX, posY);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int posX = 1;
+        int posY = -1;
+        Coordinates coord = new Coordinates(2, 1);
+        Character testCharacter = new Character(1,2);
+        testCharacter.movePosition(posX, posY);
+        assertEquals(coord.getCoordX(), testCharacter.getPosition().getCoordX());
+        assertEquals(coord.getCoordY(), testCharacter.getPosition().getCoordY());
     }
     
 }

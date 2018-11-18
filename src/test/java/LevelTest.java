@@ -31,6 +31,8 @@ public class LevelTest {
     
     @Before
     public void setUp() {
+        int sizeX = 30;
+        int sizeY = 50;
     }
     
     @After
