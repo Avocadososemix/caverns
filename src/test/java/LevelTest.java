@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
  */
 public class LevelTest {
     
-    private Level miniLevel;
+    private Level testLevel;
     private int sizeX, sizeY;
     private Tile[][] tiles;
     
@@ -39,7 +39,7 @@ public class LevelTest {
     public void setUp() {
         sizeX = 30;
         sizeY = 50;
-        miniLevel = new Level(30, 50);
+        testLevel = new Level(30, 50);
     }
     
     @After
@@ -53,7 +53,7 @@ public class LevelTest {
     public void testGetSizeX() {
         System.out.println("getSizeX");
         int expResult = 30;
-        int result = miniLevel.getSizeX();
+        int result = testLevel.getSizeX();
         assertEquals(expResult, result);
     }
 
@@ -64,7 +64,7 @@ public class LevelTest {
     public void testGetSizeY() {
         System.out.println("getSizeY");
         int expResult = 50;
-        int result = miniLevel.getSizeY();
+        int result = testLevel.getSizeY();
         assertEquals(expResult, result);
     }
 
@@ -74,10 +74,10 @@ public class LevelTest {
     @Test
     public void testInitializeLevel() {
         System.out.println("initializeLevel");
-        miniLevel.initializeLevel();
+        testLevel.initializeLevel();
         for (int i = 0; i < sizeY; i++) {
             for (int j = 0; j < sizeX; j++) {
-                if (miniLevel.tiles[j][i].getSymbol() != '.') {
+                if (testLevel.tiles[j][i].getSymbol() != '.') {
                     fail();
                 }
             }
@@ -90,10 +90,10 @@ public class LevelTest {
     @Test
     public void testFillWithWalls() {
         System.out.println("fillWithWalls");
-        miniLevel.fillWithWalls();
+        testLevel.fillWithWalls();
         for (int i = 0; i < sizeY; i++) {
             for (int j = 0; j < sizeX; j++) {
-                if (miniLevel.tiles[j][i].getSymbol() != '#') {
+                if (testLevel.tiles[j][i].getSymbol() != '#') {
                     fail();
                 }
             }
@@ -106,10 +106,11 @@ public class LevelTest {
     @Test
     public void testRandomWalk() {
         System.out.println("randomWalk");
-        miniLevel.randomWalk();
-        for (int i = 0; i < sizeY; i++) {
-            for (int j = 0; j < sizeX; j++) {
-                if (miniLevel.tiles[j][i].getSymbol() != '.') {
+        testLevel.fillWithWalls();
+        testLevel.randomWalk();
+        for (int i = 0; i < testLevel.sizeY; i++) {
+            for (int j = 0; j < testLevel.sizeX; j++) {
+                if (testLevel.tiles[j][i].getSymbol() != '#') {
                     assertTrue(true);
                 }
             }
@@ -124,10 +125,10 @@ public class LevelTest {
         System.out.println("setWall");
         int coordX = 1;
         int coordY = 2;
-        miniLevel.initializeLevel();
-        miniLevel.setWall(coordX, coordY);
+        testLevel.initializeLevel();
+        testLevel.setWall(coordX, coordY);
         char symbol = '#';
-        assertTrue(miniLevel.getLevelTile(coordX, coordY).getSymbol() == symbol);
+        assertTrue(testLevel.getLevelTile(coordX, coordY).getSymbol() == symbol);
     }
 
     /**
@@ -138,10 +139,10 @@ public class LevelTest {
         System.out.println("setEmpty");
         int coordX = 1;
         int coordY = 2;
-        miniLevel.fillWithWalls();
-        miniLevel.setEmpty(coordX, coordY);
+        testLevel.fillWithWalls();
+        testLevel.setEmpty(coordX, coordY);
         char symbol = '.';
-        assertTrue(miniLevel.getLevelTile(coordX, coordY).getSymbol() == symbol);
+        assertTrue(testLevel.getLevelTile(coordX, coordY).getSymbol() == symbol);
     }
 
     /**
@@ -151,11 +152,11 @@ public class LevelTest {
     public void testMoveCharacter() {
         System.out.println("moveCharacter");
         Character player = new Character(0,0);
-        miniLevel.addCharacter(player);
-        miniLevel.initializeLevel();
+        testLevel.addCharacter(player);
+        testLevel.initializeLevel();
         int moveX = 1;
         int moveY = 2;
-        miniLevel.moveCharacter(player, moveX, moveY);
+        testLevel.moveCharacter(player, moveX, moveY);
         assertTrue(player.getPosition().getCoordX() == 0+moveX);
         assertTrue(player.getPosition().getCoordY() == 0+moveY);
     }
@@ -167,12 +168,12 @@ public class LevelTest {
     public void testDirectionPassable() {
         System.out.println("directionPassable");
         Character testPlayer = new Character(0,0);
-        miniLevel.fillWithWalls();
+        testLevel.fillWithWalls();
         int moveX = 1, moveY = 1;
-        boolean result = miniLevel.directionPassable(testPlayer, moveX, moveY);
+        boolean result = testLevel.directionPassable(testPlayer, moveX, moveY);
         assertEquals(false, result);
-        miniLevel.setEmpty(1,1);
-        result = miniLevel.directionPassable(testPlayer, moveX, moveY);
+        testLevel.setEmpty(1,1);
+        result = testLevel.directionPassable(testPlayer, moveX, moveY);
         assertEquals(true, result);
         
     }
@@ -187,9 +188,9 @@ public class LevelTest {
         int[] resultsX = {1,2,2,1};
         int[] resultsY = {1,1,2,2};
         Character testPlayer = new Character(1,2);
-        miniLevel.initializeLevel();
+        testLevel.initializeLevel();
         for (int i = 0; i < directions.length; i++) {
-            miniLevel.moveCommand(directions[i], testPlayer);
+            testLevel.moveCommand(directions[i], testPlayer);
             assertTrue(testPlayer.getPosition().getCoordX() == resultsX[i]);
             assertTrue(testPlayer.getPosition().getCoordY() == resultsY[i]);
         }
@@ -202,9 +203,9 @@ public class LevelTest {
     public void testAddCharacter() {
         System.out.println("addCharacter");
         Character testPlayer = new Character(0,0);
-        assertTrue(miniLevel.mapObjects.isEmpty());
-        miniLevel.addCharacter(testPlayer);
-        assertTrue(!miniLevel.mapObjects.isEmpty());
+        assertTrue(testLevel.mapObjects.isEmpty());
+        testLevel.addCharacter(testPlayer);
+        assertTrue(!testLevel.mapObjects.isEmpty());
     }
 
     /**
@@ -213,18 +214,19 @@ public class LevelTest {
     @Test
     public void testGetLevelTile() {
         System.out.println("getLevelTile");
-        miniLevel.fillWithWalls();
+        testLevel.fillWithWalls();
         int coordX = 3;
         int coordY = 3;
         char expResult = '#';
-        Tile result = miniLevel.getLevelTile(coordX, coordY);
+        Tile result = testLevel.getLevelTile(coordX, coordY);
         assertEquals(expResult, result.getSymbol());
-        miniLevel.setEmpty(coordX, coordY);
+        testLevel.setEmpty(coordX, coordY);
         assertEquals('.', result.getSymbol());
     }
 
     /**
-     * Test of printLevel method, of class Level.
+     * Test of printLevel method, of class Level. Tests a level layout with 2
+     * wall pieces.
      */
     @Test
     public void testPrintLevel() {
@@ -232,13 +234,15 @@ public class LevelTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         PrintStream oldOut = System.out;
         System.setOut(new PrintStream(outContent));
-        Level miniLevel = new Level(0,0);
+        Level miniLevel = new Level(3,3);
         miniLevel.initializeLevel();
-        //miniLevel.setWall(3, 4);
-        //iniLevel.setWall(14, 10);
+        miniLevel.setWall(1, 1);
+        miniLevel.setWall(2, 2);
         miniLevel.printLevel();
         System.setOut(oldOut);
-        assertEquals(".", outContent.toString());
+        //String level = outContent.toString();
+        //System.out.println(level);
+        assertEquals("...\n.#.\n..#", outContent.toString().trim());
     }
 
     /**
@@ -247,10 +251,20 @@ public class LevelTest {
     @Test
     public void testPrintLevelWithCharacters() {
         System.out.println("printLevelWithCharacters");
-        Level instance = null;
-        instance.printLevelWithCharacters();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        PrintStream oldOut = System.out;
+        System.setOut(new PrintStream(outContent));
+        Level miniLevel = new Level(3,3);
+        miniLevel.initializeLevel();
+        miniLevel.setWall(1, 1);
+        miniLevel.setWall(2, 2);
+        Character testCharacter = new Character('@',0,0);
+        miniLevel.addCharacter(testCharacter);
+        miniLevel.printLevelWithCharacters();
+        System.setOut(oldOut);
+        //String level = outContent.toString();
+        //System.out.println(level);
+        assertEquals("@..\n.#.\n..#", outContent.toString().trim());
     }
 
     /**
@@ -259,12 +273,9 @@ public class LevelTest {
     @Test
     public void testReturnErrorLog() {
         System.out.println("returnErrorLog");
-        Level instance = null;
-        ArrayList<String> expResult = null;
-        ArrayList<String> result = instance.returnErrorLog();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String errorString = "This is an error";
+        testLevel.errorLog.add(errorString);
+        assertEquals(errorString, testLevel.returnErrorLog().get(0));
     }
     
 }
