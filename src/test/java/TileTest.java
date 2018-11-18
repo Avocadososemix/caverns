@@ -42,12 +42,10 @@ public class TileTest {
     @Test
     public void testGetSymbol() {
         System.out.println("getSymbol");
-        Tile instance = null;
-        char expResult = ' ';
+        Tile instance = new Tile('.');
+        char expResult = '.';
         char result = instance.getSymbol();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -56,11 +54,10 @@ public class TileTest {
     @Test
     public void testSetSymbol() {
         System.out.println("setSymbol");
-        char symbol = ' ';
-        Tile instance = null;
+        char symbol = '.';
+        Tile instance = new Tile('#');
         instance.setSymbol(symbol);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(symbol, instance.getSymbol());
     }
 
     /**
@@ -69,12 +66,10 @@ public class TileTest {
     @Test
     public void testGetPassable() {
         System.out.println("getPassable");
-        Tile instance = null;
-        boolean expResult = false;
+        Tile instance = new Tile('.');
+        boolean expResult = true;
         boolean result = instance.getPassable();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -84,10 +79,9 @@ public class TileTest {
     public void testSetPassable() {
         System.out.println("setPassable");
         boolean passable = false;
-        Tile instance = null;
+        Tile instance = new Tile('#');
         instance.setPassable(passable);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(passable, instance.getPassable());
     }
     
 }
