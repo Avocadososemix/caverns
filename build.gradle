@@ -1,12 +1,3 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath ("org.junit.platform:junit-platform-gradle-plugin:1.0.0-M4")
-    }
-}
-
 apply plugin: 'java'
 apply plugin: 'jacoco'
 apply plugin: 'application'
@@ -30,15 +21,18 @@ run{
     standardInput = System.in
 }
 
-apply plugin: 'org.junit.platform.gradle.plugin'
-
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.1.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.1.1'
+repositories {
+    mavenCentral()
+    // You may define additional repositories, or even remove "mavenCentral()".
+    // Read more about repositories here:
+    //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:repositories
 }
 
-test {
-    useJUnitPlatform()
+dependencies {
+    // TODO: Add dependencies here ...
+    // You can read more about how to add dependency here:
+    //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:how_to_declare_your_dependencies
+    testCompile group: 'junit', name: 'junit', version: '4.10'
 }
 
 jacocoTestReport {
