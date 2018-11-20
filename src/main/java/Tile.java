@@ -23,6 +23,14 @@ public class Tile {
         this.passable = true;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     /**
      * Returns the ascii-character that represents this tile
      * 

@@ -81,20 +81,17 @@ public class Level {
             if (random < proportionalSizeX/2) {
                 middleX++;
                 if (middleX>sizeX-1) break;
-                setEmpty(middleX, middleY);
             } else if (random < proportionalSizeX) {
                 middleX--;
                 if (middleX<0) break;
-                setEmpty(middleX, middleY);
             } else if (random < (1-(1-proportionalSizeX)/2)) {
                 middleY++;
                 if (middleY>sizeY-1) break;
-                setEmpty(middleX, middleY);
             } else {
                 middleY--;
                 if (middleY<0) break;
-                setEmpty(middleX, middleY);
             }
+            setEmpty(middleX, middleY);
         }
     }
 
@@ -156,6 +153,7 @@ public class Level {
         return tiles[moveLocationX][moveLocationY].getPassable();
     }
 
+    //TODO Make directions enum
     /**
      * Parses the move commands given to it, and calls a movement method using
      * the cardinal direction given to it.
