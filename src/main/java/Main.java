@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -16,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javax.swing.JFileChooser;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -29,39 +32,32 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     public void start(Stage primaryStage) throws IOException {
-        StackPane root = startGame(primaryStage);
+        Parent root = startGame(primaryStage);
         Scene scene = new Scene(root, 600, 500);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Cavern Explorer");
         primaryStage.show();
     }
 
-    private StackPane startGame(Stage PrimaryStage) throws IOException {
+    private Parent startGame(Stage PrimaryStage) throws IOException {
         Level level = new Level(60, 60);
         Character player = new Character(0, 0);
 
-        Button btn = new Button();
-        btn.setText("North");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                //Make player move north
-            }
-        });
-        Text t = new Text();
-        t.setText("This is a text sample");
-//        BorderPane border = new BorderPane();
-//        HBox hbox = hbox.addHBox();
-//        border.setTop(hbox);
-//        border.setLeft(addVBox());
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        root.getChildren().add(t);
+        //Parent root = new StackPane();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/GUI.fxml"));
+        Parent root = loader.load();
+        //FXMLLoader fxmlLoader = new FXMLLoader( getClass().getResource("/main.fxml") );
+        //Parent root = new FXMLLoader.load(getClass().getResource("/GUI.fxml"));
+        //Parent root = (Parent) loader.load();
         return root;
     }
 
     public static void main(String[] args) {
+        JFileChooser chooser = new JFileChooser();
+        System.out.println("getCurrentDirectory(): "
+                + chooser.getCurrentDirectory());
+
         launch(args);
         System.out.println("Welcome to level 1");
         Level starter = new Level(80, 30); //creating a new level
@@ -89,7 +85,7 @@ public class Main extends Application {
         Scanner scan = new Scanner(System.in);
         String input = "";
         while (true) {
-            starter.printLevelWithCharacters();
+            starter.printConstrained(16,32);
             System.out.println("Select direction to move: ");
             input = scan.nextLine();
             if (input.trim().contains("end")) {

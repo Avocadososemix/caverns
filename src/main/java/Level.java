@@ -17,8 +17,9 @@ public class Level {
 
     public int sizeX, sizeY;
     public Tile[][] tiles;
-    public ArrayList<Character> mapObjects = new ArrayList();
-    public ArrayList<String> errorLog = new ArrayList<>(); //Can be printed to receive errors with timestamps
+    public Character playerCharacter = new Character();
+    //public ArrayList<Character> mapObjects = new ArrayList();
+    public ArrayList<String> errorLog = new ArrayList<>(); //Can be printed to receive errors with timestamps, probably easier to remove than implement quickly without ArrayList
 
     public Level(int sizeX, int sizeY) {
         this.sizeX = sizeX;
@@ -182,7 +183,8 @@ public class Level {
      * @param player
      */
     public void addCharacter(Character player) {
-        mapObjects.add(player);
+        //mapObjects.add(player);
+        playerCharacter = player;
     }
 
     /**
@@ -222,13 +224,47 @@ public class Level {
             }
         }
         //adding characters to map
-        mapObjects.forEach((character) -> {
-            tilesWithCharacters[character.getPosition().getCoordX()][character.getPosition().getCoordY()] = character.getSymbol();
-        });
+            tilesWithCharacters[playerCharacter.getPosition().getCoordX()][playerCharacter.getPosition().getCoordY()] = playerCharacter.getSymbol();
+        
+//        mapObjects.forEach((character) -> {
+//            tilesWithCharacters[character.getPosition().getCoordX()][character.getPosition().getCoordY()] = character.getSymbol();
+//        });
         //creating a printable version of the map with both tiles and characters
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < sizeY; i++) {
             for (int j = 0; j < sizeX; j++) {
+                sb.append(tilesWithCharacters[j][i]);
+            }
+            sb.append('\n');
+        }
+        System.out.println(sb);
+    }
+    
+    public char tileRelativeToCharacterSymbol(int x, int y) {
+        if (x < 0 || x >= sizeX || y < 0 || y >= sizeY) {
+        return ' ';
+    } else {
+            return tiles[x][y].getSymbol();
+        }
+    }
+    
+    public void printConstrained(int viewX, int viewY) {
+        char[][] tilesWithCharacters = new char[viewX][viewY];
+        
+        int origoX = playerCharacter.getPosition().getCoordX();
+        int origoY = playerCharacter.getPosition().getCoordY();
+
+        for (int j = 0; j < viewY; j++) {
+            for (int i = 0; i < viewX; i++) {
+                tilesWithCharacters[i][j] = tileRelativeToCharacterSymbol(origoX-i/2,origoY-j/2);
+            }
+        }
+        tilesWithCharacters[viewX/2][viewY/2] = playerCharacter.getSymbol();
+
+        //creating a printable version of the map with both tiles and characters
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < viewY; i++) {
+            for (int j = 0; j < viewX; j++) {
                 sb.append(tilesWithCharacters[j][i]);
             }
             sb.append('\n');
