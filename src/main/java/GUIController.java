@@ -3,6 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,6 +20,7 @@ import javafx.scene.text.Font;
 
     private Level starter;
     private final Character player;
+    private String statusMessage;
 
     @FXML
     private Label screenOutput;
@@ -29,28 +32,30 @@ import javafx.scene.text.Font;
     private Button south;
     @FXML
     private Button east;
+    @FXML
+    private Label message;
 
     @FXML
     private void handleButtonActionEast(ActionEvent event) {
-        starter.moveCommand("E", player);
+        statusMessage = starter.moveCommand("E", player);
         screenPrint();
     }
 
     @FXML
     private void handleButtonActionSouth(ActionEvent event) {
-        starter.moveCommand("S", player);
+        statusMessage = starter.moveCommand("S", player);
         screenPrint();
     }
 
     @FXML
     private void handleButtonActionWest(ActionEvent event) {
-        starter.moveCommand("W", player);
+        statusMessage = starter.moveCommand("W", player);
         screenPrint();
     }
 
     @FXML
     private void handleButtonActionNorth(ActionEvent event) {
-        starter.moveCommand("N", player);
+        statusMessage = starter.moveCommand("N", player);
         screenPrint();
     }
 
@@ -65,13 +70,15 @@ import javafx.scene.text.Font;
         starter.addCharacter(player); //adding the player character to the level
     }
 
-    public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
-        starter.printConstrained(48, 17);
-    }
-
     public void screenPrint() {
         screenOutput.setText(starter.printConstrained(48, 17));
         screenOutput.setFont(Font.font(java.awt.Font.MONOSPACED, 15));
+        message.setText(statusMessage);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        starter.printConstrained(48, 17);
     }
 
 }

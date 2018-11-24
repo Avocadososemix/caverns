@@ -125,8 +125,9 @@ public class Level {
      * @param character
      * @param moveX
      * @param moveY
+     * @return 
      */
-    public void moveCharacter(Character character, int moveX, int moveY) {
+    public String moveCharacter(Character character, int moveX, int moveY) {
 
         if (character.getPosition().getCoordX() + moveX < sizeX
                 && character.getPosition().getCoordY() + moveY < sizeY
@@ -134,9 +135,10 @@ public class Level {
                 && character.getPosition().getCoordY() + moveY >= 0
                 && directionPassable(character, moveX, moveY)) {
             character.movePosition(moveX, moveY);
+            return "";
         } else {
-            System.out.println("You are blocked from moving there ");
             errorLog.add("Could not move there" + Time.valueOf(LocalTime.MIN));
+            return "You are blocked from moving there";
         }
     }
 
@@ -161,19 +163,20 @@ public class Level {
      * 
      * @param direction
      * @param character 
+     * @return  
      */
-    public void moveCommand(String direction, Character character) {
+    public String moveCommand(String direction, Character character) {
         if (direction.trim().equalsIgnoreCase("n")) {
-            moveCharacter(character, 0, -1);
+            return moveCharacter(character, 0, -1);
         } else if (direction.trim().equalsIgnoreCase("e")) {
-            moveCharacter(character, 1, 0);
+            return moveCharacter(character, 1, 0);
         } else if (direction.trim().equalsIgnoreCase("s")) {
-            moveCharacter(character, 0, 1);
+            return moveCharacter(character, 0, 1);
         } else if (direction.trim().equalsIgnoreCase("w")) {
-            moveCharacter(character, -1, 0);
+            return moveCharacter(character, -1, 0);
         } else {
             errorLog.add("Did not receive valid move command" + Time.valueOf(LocalTime.MIN));
-            System.out.println("That's not a valid move.");
+            return "That's not a valid move.";
         }
     }
 
