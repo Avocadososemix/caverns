@@ -240,27 +240,42 @@ public class Level {
         System.out.println(sb);
     }
     
+    /**
+     * Gives the map printing method the tile symbols of location on the map.
+     * Returns a preset symbol for positions outside the generated map.
+     * 
+     * @param x
+     * @param y
+     * @return 
+     */
     public char tileRelativeToCharacterSymbol(int x, int y) {
         if (x < 0 || x >= sizeX || y < 0 || y >= sizeY) {
-        return ' ';
+        return '█';
     } else {
             return tiles[x][y].getSymbol();
         }
     }
     
+    /**
+     * Prints a version of the current level that only displays a portion of the
+     * whole map centered around the player character. The amount of map 
+     * displayed on the sides of the player can be adjusested.
+     * 
+     * @param viewX
+     * @param viewY 
+     */
     public void printConstrained(int viewX, int viewY) {
         char[][] tilesWithCharacters = new char[viewX][viewY];
         
         int origoX = playerCharacter.getPosition().getCoordX();
-        int playerX = playerCharacter.getPosition().getCoordX();
-        int playerY = playerCharacter.getPosition().getCoordX();
         int origoY = playerCharacter.getPosition().getCoordY();
-
+        //fetching symbols that represent background tileset
         for (int j = 0; j < viewY; j++) {
             for (int i = 0; i < viewX; i++) {
                 tilesWithCharacters[i][j] = tileRelativeToCharacterSymbol(origoX+i-viewX/2,origoY+j-viewY/2);
             }
         }
+        //adding the player character to the map
         tilesWithCharacters[viewX/2][viewY/2] = playerCharacter.getSymbol();
 
         //creating a printable version of the map with both tiles and characters
