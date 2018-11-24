@@ -6,7 +6,6 @@
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -203,9 +202,9 @@ public class LevelTest {
     public void testAddCharacter() {
         System.out.println("addCharacter");
         Character testPlayer = new Character(0,0);
-        assertTrue(testLevel.mapObjects.isEmpty());
+        assertTrue(testLevel.playerCharacter == null);
         testLevel.addCharacter(testPlayer);
-        assertTrue(!testLevel.mapObjects.isEmpty());
+        assertTrue(testLevel.playerCharacter != null);
     }
 
     /**

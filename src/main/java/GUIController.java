@@ -5,6 +5,7 @@
  */
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
@@ -13,16 +14,21 @@ import javafx.scene.text.Font;
  *
  * @author lkaranko
  */
-public class GUIController {
+    public class GUIController implements Initializable {
 
     private Level starter;
-    private Character player;
+    private final Character player;
 
     @FXML
     private Label screenOutput;
-
     @FXML
-    private Button west, east, south, north;
+    private Button west;
+    @FXML
+    private Button north;
+    @FXML
+    private Button south;
+    @FXML
+    private Button east;
 
     @FXML
     private void handleButtonActionEast(ActionEvent event) {
@@ -57,6 +63,10 @@ public class GUIController {
         player = new Character();
         player.setPosition(40, 40);
         starter.addCharacter(player); //adding the player character to the level
+    }
+
+    public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
+        starter.printConstrained(48, 17);
     }
 
     public void screenPrint() {

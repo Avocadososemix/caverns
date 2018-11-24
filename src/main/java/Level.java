@@ -213,7 +213,7 @@ public class Level {
     }
 
     /**
-     * Prints out the current level with all map objects
+     * Prints out the whole current level with all map objects
      */
     public void printLevelWithCharacters() {
         char[][] tilesWithCharacters = new char[sizeX][sizeY];
@@ -250,7 +250,7 @@ public class Level {
      */
     public char tileRelativeToCharacterSymbol(int x, int y) {
         if (x < 0 || x >= sizeX || y < 0 || y >= sizeY) {
-        return '█';
+        return '▒';
     } else {
             return tiles[x][y].getSymbol();
         }
@@ -263,6 +263,7 @@ public class Level {
      * 
      * @param viewX
      * @param viewY 
+     * @return  
      */
     public String printConstrained(int viewX, int viewY) {
         char[][] tilesWithCharacters = new char[viewX][viewY];
@@ -287,7 +288,6 @@ public class Level {
             sb.append('\n');
         }
         return sb.toString();
-        //System.out.println(sb);
     }
 
     /**
