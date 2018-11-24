@@ -19,6 +19,13 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    /**
+     * This method creates the Javafx panel for the program.
+     * 
+     * @param primaryStage
+     * @throws IOException 
+     */
+    @Override
     public void start(Stage primaryStage) throws IOException {
         Parent root = setScene(primaryStage);
         Scene scene = new Scene(root, 600, 500);
@@ -27,6 +34,13 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Loads the FXML for the GUI, and returns it to the Scene setting method.
+     * 
+     * @param PrimaryStage
+     * @return
+     * @throws IOException 
+     */
     private Parent setScene(Stage PrimaryStage) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/GUI.fxml"));
@@ -36,7 +50,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-        System.out.println("Welcome to level 1");
     }
 
 }

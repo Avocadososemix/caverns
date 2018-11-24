@@ -27,7 +27,7 @@
       <Button fx:id="south" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" text="S" onAction="#handleButtonActionSouth" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <Button fx:id="east" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" text="E" onAction="#handleButtonActionEast" GridPane.columnIndex="2" GridPane.rowIndex="3" />
       <Label fx:id="screenOutput" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="439.0" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-      <Label fx:id="message" prefHeight="26.0" prefWidth="406.0" text="Stuff that happens" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <Label fx:id="message" prefHeight="26.0" prefWidth="406.0" text="Click a button to enter the caverns" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2" />
       <!-- <TextField GridPane.columnIndex="1" GridPane.columnSpan="2" /> -->
    </children>
 </GridPane>

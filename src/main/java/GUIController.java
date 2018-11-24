@@ -13,12 +13,15 @@ import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 
 /**
- *
+ * This class controls the use of the GUI. All level data is loaded in the
+ * constructor. This class contains all actions that the user employs to 
+ * manipulate the GUI, which then call methods in the Level class.
+ * 
  * @author lkaranko
  */
     public class GUIController implements Initializable {
 
-    private Level starter;
+    private final Level starter;
     private final Character player;
     private String statusMessage;
 
@@ -35,6 +38,10 @@ import javafx.scene.text.Font;
     @FXML
     private Label message;
 
+    /**
+     * Actionhandlers that receive move calls from the GUI.
+     * @param event 
+     */
     @FXML
     private void handleButtonActionEast(ActionEvent event) {
         statusMessage = starter.moveCommand("E", player);
@@ -59,17 +66,22 @@ import javafx.scene.text.Font;
         screenPrint();
     }
 
+    /**
+     * The level and characters are loaded into the class in the constructor.
+     */
     public GUIController() {
         starter = new Level(80, 80); //creating a new level
         starter.fillWithWalls(); //filling level with walls
         starter.randomWalk(); //creating a random cavern
         starter.randomWalk(); //creating a random cavern
         starter.randomWalk(); //creating a random cavern
-        player = new Character();
-        player.setPosition(40, 40);
+        player = new Character(40,40);
         starter.addCharacter(player); //adding the player character to the level
     }
 
+    /**
+     * Method used to print all information that changes on the GUI.
+     */
     public void screenPrint() {
         screenOutput.setText(starter.printConstrained(48, 17));
         screenOutput.setFont(Font.font(java.awt.Font.MONOSPACED, 15));

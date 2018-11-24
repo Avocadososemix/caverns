@@ -18,7 +18,6 @@ public class Level {
     public int sizeX, sizeY;
     public Tile[][] tiles;
     public Character playerCharacter = new Character();
-    //public ArrayList<Character> mapObjects = new ArrayList();
     public ArrayList<String> errorLog = new ArrayList<>(); //Can be printed to receive errors with timestamps, probably easier to remove than implement quickly without ArrayList
 
     public Level(int sizeX, int sizeY) {
