@@ -264,7 +264,7 @@ public class Level {
      * @param viewX
      * @param viewY 
      */
-    public void printConstrained(int viewX, int viewY) {
+    public String printConstrained(int viewX, int viewY) {
         char[][] tilesWithCharacters = new char[viewX][viewY];
         
         int origoX = playerCharacter.getPosition().getCoordX();
@@ -286,7 +286,8 @@ public class Level {
             }
             sb.append('\n');
         }
-        System.out.println(sb);
+        return sb.toString();
+        //System.out.println(sb);
     }
 
     /**

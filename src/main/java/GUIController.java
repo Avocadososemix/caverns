@@ -3,11 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
@@ -16,67 +13,55 @@ import javafx.scene.text.Font;
  *
  * @author lkaranko
  */
-public class GUIController implements Initializable {
-    
-    @FXML
-    private Label label;
-        
+public class GUIController {
+
+    private Level starter;
+    private Character player;
+
     @FXML
     private Label screenOutput;
-    
+
     @FXML
-    private Button west;
-    
+    private Button west, east, south, north;
+
     @FXML
     private void handleButtonActionEast(ActionEvent event) {
-        System.out.println("You clicked me!");
+        starter.moveCommand("E", player);
         screenPrint();
     }
 
-    
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
-        
-    public void buttonClickEast() {
+    @FXML
+    private void handleButtonActionSouth(ActionEvent event) {
+        starter.moveCommand("S", player);
         screenPrint();
     }
-    
-    
+
+    @FXML
+    private void handleButtonActionWest(ActionEvent event) {
+        starter.moveCommand("W", player);
+        screenPrint();
+    }
+
+    @FXML
+    private void handleButtonActionNorth(ActionEvent event) {
+        starter.moveCommand("N", player);
+        screenPrint();
+    }
+
+    public GUIController() {
+        starter = new Level(80, 80); //creating a new level
+        starter.fillWithWalls(); //filling level with walls
+        starter.randomWalk(); //creating a random cavern
+        starter.randomWalk(); //creating a random cavern
+        starter.randomWalk(); //creating a random cavern
+        player = new Character();
+        player.setPosition(40, 40);
+        starter.addCharacter(player); //adding the player character to the level
+    }
+
     public void screenPrint() {
-        screenOutput.setText("#########################...#####......#########################################\n" +
-"####################.......#####.........###....################################\n" +
-"####################..##.....#######.........#.#################################\n" +
-"###################.........#####..........#....################################\n" +
-"###################................###.#...........#############################\n" +
-"###################.....................#........#.#############################\n" +
-"################.###....##......#..................#############################\n" +
-"###############....###...#............#..........###############################\n" +
-"##############.................................#################################\n" +
-"##############.....#...........................#################################\n" +
-"########.###..................#########.......##################################\n" +
-"########..#..#................#..............######This is a test  #############\n" +
-"########.....#................................##################################\n" +
-"######...............................#.....######I'm a placeholder##############\n" +
-"####......................##..................##################################\n" +
-"###.....................................@.....###The new methods to print the ##\n" +
-"##...........................................###################################\n" +
-"##..##.......#.....##..........##################level will be used here soon###\n" +
-".........#############..........################################################\n" +
-"##...################...........################################################\n" +
-"#....####################.....#..###############################################\n" +
-"###.#########################.#.################################################\n" +
-"#############################...################################################\n" +
-"################################################################################\n" +
-"#####Close this window to get to the console version of the program :)##########\n" +
-"################################################################################\n" +
-"################################################################################\n" +
-"################################################################################\n" +
-"################################################################################\n" +
-"################################################################################");
+        screenOutput.setText(starter.printConstrained(48, 17));
         screenOutput.setFont(Font.font(java.awt.Font.MONOSPACED, 15));
     }
-    
+
 }
