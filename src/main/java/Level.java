@@ -252,11 +252,13 @@ public class Level {
         char[][] tilesWithCharacters = new char[viewX][viewY];
         
         int origoX = playerCharacter.getPosition().getCoordX();
+        int playerX = playerCharacter.getPosition().getCoordX();
+        int playerY = playerCharacter.getPosition().getCoordX();
         int origoY = playerCharacter.getPosition().getCoordY();
 
         for (int j = 0; j < viewY; j++) {
             for (int i = 0; i < viewX; i++) {
-                tilesWithCharacters[i][j] = tileRelativeToCharacterSymbol(origoX-i/2,origoY-j/2);
+                tilesWithCharacters[i][j] = tileRelativeToCharacterSymbol(origoX+i-viewX/2,origoY+j-viewY/2);
             }
         }
         tilesWithCharacters[viewX/2][viewY/2] = playerCharacter.getSymbol();

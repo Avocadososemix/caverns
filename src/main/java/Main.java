@@ -85,7 +85,7 @@ public class Main extends Application {
         Scanner scan = new Scanner(System.in);
         String input = "";
         while (true) {
-            starter.printConstrained(16,32);
+            starter.printConstrained(40,16);
             System.out.println("Select direction to move: ");
             input = scan.nextLine();
             if (input.trim().contains("end")) {
