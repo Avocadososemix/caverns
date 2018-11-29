@@ -1,6 +1,9 @@
 # caverns
 A java application that is used to generate random caverns in the fashion of roguelike games.
 
+Travis:
+[![Build Status](https://travis-ci.org/Avocadososemix/caverns.svg?branch=master)](https://travis-ci.org/Avocadososemix/caverns)
+
 
 ## Links to documentation
 

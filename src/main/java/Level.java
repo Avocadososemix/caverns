@@ -73,10 +73,8 @@ public class Level {
         int middleY = sizeY/2;
         //System.out.printf("Size X: %d Size Y: %d\n", sizeX, sizeY );
         double proportionalSizeX = (sizeX/(sizeX+sizeY*1.0));
-        //System.out.println(proportionalSizeX);
         setEmpty(middleX, middleY);
         while(true) {
-        //while (middleX != sizeX-1 && middleX != 0 && middleY != sizeY-1 && middleY != 0) {
             double random = Math.random();
             if (random < proportionalSizeX/2) {
                 middleX++;

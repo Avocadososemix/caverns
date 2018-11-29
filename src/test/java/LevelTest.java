@@ -201,8 +201,7 @@ public class LevelTest {
     @Test
     public void testAddCharacter() {
         System.out.println("addCharacter");
-        Character testPlayer = new Character(0,0);
-        assertTrue(testLevel.playerCharacter == null);
+        Character testPlayer = new Character();
         testLevel.addCharacter(testPlayer);
         assertTrue(testLevel.playerCharacter != null);
     }

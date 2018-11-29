@@ -26,18 +26,9 @@ import javafx.scene.text.Font;
     private String statusMessage;
 
     @FXML
-    private Label screenOutput;
+    private Label screenOutput, message;
     @FXML
-    private Button west;
-    @FXML
-    private Button north;
-    @FXML
-    private Button south;
-    @FXML
-    private Button east;
-    @FXML
-    private Label message;
-
+    private Button west, east, north, south;
     /**
      * Actionhandlers that receive move calls from the GUI.
      * @param event 
