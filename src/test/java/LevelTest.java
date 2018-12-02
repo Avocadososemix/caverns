@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 
+import GameLogic.Character;
+import GameLogic.Level;
+import GameLogic.Tile;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.After;

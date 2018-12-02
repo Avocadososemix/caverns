@@ -1,3 +1,4 @@
+package GameLogic;
 
 import java.sql.Time;
 import java.time.LocalTime;
@@ -91,6 +92,10 @@ public class Level {
             }
             setEmpty(middleX, middleY);
         }
+    }
+    
+    public int[][] binarySpacePartition(int[][] tiles) {
+        return tiles;
     }
 
     /**

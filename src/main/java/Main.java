@@ -1,4 +1,6 @@
 
+import BinarySpacePartition.BinarySpacePartition;
+import GameLogic.Level;
 import javafx.application.Application;
 import java.io.IOException;
 import static javafx.application.Application.launch;
@@ -48,7 +50,12 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        launch(args);
+        Level level = new Level(5,5);
+        BinarySpacePartition part = new BinarySpacePartition(level.tiles);
+        part.bisectTable();
+        
+        
+        //launch(args);
     }
 
 }

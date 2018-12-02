@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import GameLogic.Character;
+import GameLogic.Coordinates;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
