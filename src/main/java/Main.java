@@ -50,11 +50,11 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        Level level = new Level(5,5);
+        Level level = new Level(5,5); //testing
         BinarySpacePartition part = new BinarySpacePartition(level.tiles);
-        part.bisectTable();
+        part.generateInitialRooms(part.level);
         
-        
+        //remove lines above and uncomment launch to test program
         //launch(args);
     }
 

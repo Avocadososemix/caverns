@@ -15,3 +15,10 @@ Binary Space Partitioning (BSP), an algorithm that has been used in games since 
 The BSP-algorithm needs to take the whole map, and make an intelligent horizontal or vertical cut in the level, creating two pieces of the level which together make the whole map. After the cut, a new cut is made to both halves in a direction perpendicular to the first cut that separated both pieces of the level from each other. This process in then repeated until we have created a lattice of different sized *boxes* that are all just parts of the larger original map.  
 
 After this, inside our smaller boxes we create rooms that occupy part of the fragments made by the BSP-algorithm. These will generally be rectangles that fit inside our level fragments. Afterwards corridors need to be created to join our new rooms to the caverns and other rooms. Ideally the rooms can be found along the caverns after some tweaking.
+
+## Goals for Next Week
+
+1. Finally finish the BSP-algorithm
+2. Write tests for everything
+3. Polish code
+4. Implement changes from issues

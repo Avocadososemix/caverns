@@ -8,34 +8,36 @@ import java.util.Random;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author lkaranko
  */
 public class BinarySpacePartition {
-    private Tile[][] level;
+
+    public Tile[][] level;
     private int sizeX, sizeY;
+    private Room[] rooms;
 
     public BinarySpacePartition(Tile[][] level) {
         this.level = level;
         sizeX = level.length;
         sizeY = level[0].length;
     }
-    
-    public void bisectTable() {
-        int test = 0;
-        while (test != 5) {
+
+    public void generateInitialRooms(Tile[][] parent) {
         Random r = new Random();
-        int cutX = r.nextInt(sizeX);
-//        double cutX = Math.floor(sizeX*r.nextDouble());
-        System.out.println("value is " + cutX);
+        if (sizeX >= sizeY && sizeX >=10) {
+            int cutX = r.nextInt(sizeX); // a value between 0 and sizeX-1
+            System.out.println("Cutting point is " + cutX);
+            //Tile[][] partition1 = parent;
+            Room left = new Room(0, cutX-1, 0, sizeY);
+            Room right = new Room(cutX+1, sizeX, 0, sizeY);
+            
+
+        } else if (sizeX < sizeY) {
+            
         }
-        
-        
-        
+
     }
-    
-    
-    
+
 }
