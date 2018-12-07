@@ -54,7 +54,7 @@ public class Main extends Application {
         BinarySpacePartition part = new BinarySpacePartition(level.tiles);
         part.generateInitialRooms(part.level);
         
-        //remove lines above and uncomment launch to test program
+        //remove lines above and uncomment launch and launch import to test program
         //launch(args);
     }
 

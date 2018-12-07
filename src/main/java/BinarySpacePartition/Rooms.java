@@ -11,4 +11,10 @@ package BinarySpacePartition;
  */
 public class Rooms {
     
+    
+
+    public Rooms() {
+        
+    }
+    
 }
