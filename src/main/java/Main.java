@@ -52,7 +52,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         Level level = new Level(5,5); //testing
         BinarySpacePartition part = new BinarySpacePartition(level.tiles);
-        part.generateRooms(part.level);
+        char [][] rooms = part.generateRooms();
         
         //remove lines above and uncomment launch and launch import to test program
         //launch(args);
