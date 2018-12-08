@@ -1,5 +1,7 @@
 package GameLogic;
 
+import BinarySpacePartition.BinarySpacePartition;
+import BinarySpacePartition.Rooms;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -94,8 +96,9 @@ public class Level {
         }
     }
     
-    public int[][] binarySpacePartition(int[][] tiles) {
-        return tiles;
+    public  Rooms binarySpacePartition(int[][] tiles) {
+        BinarySpacePartition bsp = new BinarySpacePartition(tiles);
+        return ;
     }
 
     /**

@@ -17,14 +17,16 @@ public class BinarySpacePartition {
     public Tile[][] level;
     private int sizeX, sizeY;
     private Room[] rooms;
+    private Rooms roomlist;
 
     public BinarySpacePartition(Tile[][] level) {
         this.level = level;
         sizeX = level.length;
         sizeY = level[0].length;
+        roomlist = new Rooms();
     }
 
-    public void generateInitialRooms(Tile[][] parent) {
+    public char[][] generateRooms() {
         Random r = new Random();
         if (sizeX >= sizeY && sizeX >=10) {
             int cutX = r.nextInt(sizeX); // a value between 0 and sizeX-1
@@ -32,12 +34,21 @@ public class BinarySpacePartition {
             //Tile[][] partition1 = parent;
             Room left = new Room(0, cutX-1, 0, sizeY);
             Room right = new Room(cutX+1, sizeX, 0, sizeY);
-            
-
+            roomlist.addRoom(left);
+            roomlist.addRoom(right);
         } else if (sizeX < sizeY) {
             
         }
-
+        return roomMap();
+    }
+    
+    public char[][] roomMap(){
+        char[][] temp = new char[5][5];
+    return temp;
+}
+    
+    public void Recursion() {
+        
     }
 
 }
