@@ -6,7 +6,7 @@ Travis:
 
 ## How to Run
 
-To run this project, you need Gradle.  
+To run this project, you need [Gradle](https://gradle.org/).  
 
 Go to the project root to build the project with: `gradle build`  
 Run the project with `gradle run`.
