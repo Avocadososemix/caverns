@@ -4,6 +4,7 @@ import GameLogic.Tile;
 import GameLogic.Coordinates;
 import GameLogic.Level;
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 import java.util.concurrent.ThreadLocalRandom;
 
 /*
@@ -46,6 +47,8 @@ public class BinarySpacePartition {
      */
     public ArrayList<Room[]> splitLevel() {
         //A list is generated for mapRegions and the whole level is added as a room object.
+        PriorityQueue regionQueue = new PriorityQueue();
+        regionQueue.add(new Room(new Coordinates(0, 0), new Coordinates(level.getSizeX(), level.getSizeY())));
         ArrayList<Room> regions = new ArrayList<>();
         ArrayList<Room[]> regionsPairs = new ArrayList<>();
         regions.add(new Room(new Coordinates(0, 0), new Coordinates(level.getSizeX(), level.getSizeY())));
