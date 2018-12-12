@@ -19,7 +19,7 @@ public class BinarySpacePartition {
 
     private int levelWidth, levelHeigth;
     private final int timesSplit;
-    private int BSP_MinSplit, BSP_MaxSplit;
+    private final int BSP_MinSplit, BSP_MaxSplit;
     private Level level;
     private Room[] dugRooms;
 
@@ -30,11 +30,20 @@ public class BinarySpacePartition {
         this.BSP_MaxSplit = 70;
     }
 
+    /**
+     * This method initializes the process of applying binary space partitioning
+     * to the level.
+     */
     public void generateBSP() {
-        splitLevel();
-
+        connectRooms(splitLevel());
     }
 
+    /**
+     * A level is partitioned into smaller and smaller pieces that will all
+     * contains rooms. The
+     * 
+     * @return 
+     */
     public ArrayList<Room[]> splitLevel() {
         //A list is generated for mapRegions and the whole level is added as a room object.
         ArrayList<Room> regions = new ArrayList<>();
@@ -52,14 +61,14 @@ public class BinarySpacePartition {
                 //Choose split size randomly
                 int split = (int) ThreadLocalRandom.current().nextInt(BSP_MinSplit, BSP_MaxSplit + 1);
                 //If the split number is odd, split vertically
-                if ((split % 2) != 2) {
-                    int splitValue = levelWidth * split;
+                if ((timesSplit % 2) != 0) {
+                    int splitValue = (int) (levelWidth * split)/100;
                     region1 = new Room(region.getTopLeftCorner(), new Coordinates(splitValue, region.getHeigth()));
                     region2 = new Room(new Coordinates(region1.x0() + region1.getWidth(), region.y0()),
                             new Coordinates(region.getWidth() - splitValue, region.getHeigth()));
                 } else {
                     //split horizontally
-                    int splitValue = levelHeigth * split;
+                    int splitValue = (int) (levelHeigth * split)/100;
                     region1 = new Room(region.getTopLeftCorner(), new Coordinates(region.getWidth(), splitValue));
                     region2 = new Room(new Coordinates(region.x0(), region1.y0() + region1.getHeigth()),
                             new Coordinates(region.getWidth(), region.getHeigth() - splitValue));
@@ -80,17 +89,8 @@ public class BinarySpacePartition {
             level.fillSectionWithRooms(room.dig());
         });
     }
-
-//        int regionsNumber = 1;
-//        for (Room room : rooms) {
-//            int roomsSize = regionsNumber;
-//            int neededRegions = rooms.size()/roomsSize;
-//            
-//            ArrayList<Room> tempList = new ArrayList<>();
-//            
-//            for (int i = 0; i < roomsSize; i++) {
-//                int 
-//            }
-//        }
-//    }
+    
+    public void connectRooms(ArrayList<Room[]> roomPairs) {
+            level.connectRooms(roomPairs);
+        }
 }

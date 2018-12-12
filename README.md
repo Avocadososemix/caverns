@@ -4,6 +4,13 @@ A java application that is used to generate random caverns in the fashion of rog
 Travis:
 [![Build Status](https://travis-ci.org/Avocadososemix/caverns.svg?branch=master)](https://travis-ci.org/Avocadososemix/caverns)
 
+## How to Run
+
+To run this project, you need Gradle.  
+
+Go to the project root to build the project with: `gradle build`  
+Run the project with `gradle run`.
+
 
 ## Links to documentation
 

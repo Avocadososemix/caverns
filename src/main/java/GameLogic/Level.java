@@ -68,6 +68,48 @@ public class Level {
         }
     }
     
+    public void connectRooms(ArrayList<Room[]> roomPairs) {
+        for (Room[] roomPair : roomPairs) {
+            if (roomPair[0].center().getCoordY() == roomPair[1].center().getCoordY()) {
+                digTunnelX(roomPair[0].center(), roomPair[1].center());
+            } else if (roomPair[0].center().getCoordX() == roomPair[1].center().getCoordX()){
+                digTunnelY(roomPair[0].center(), roomPair[1].center());
+            } else {
+                return;
+            }
+        }
+    }
+    
+    public void digTunnelX(Coordinates coord1, Coordinates coord2) {
+        int yAxis = coord1.getCoordY();
+        int first, second;
+        if (coord1.getCoordX()<coord2.getCoordX()) {
+            first = coord1.getCoordX();
+            second = coord2.getCoordX();
+        } else {
+            second = coord1.getCoordX();
+            first = coord2.getCoordX();
+        }
+        for (int i = first; i < second; i++) {
+            setEmpty(i, yAxis);
+        }
+    }
+    
+        public void digTunnelY(Coordinates coord1, Coordinates coord2) {
+        int xAxis = coord1.getCoordX();
+        int first, second;
+        if (coord1.getCoordY()<coord2.getCoordY()) {
+            first = coord1.getCoordY();
+            second = coord2.getCoordY();
+        } else {
+            second = coord1.getCoordY();
+            first = coord2.getCoordY();
+        }
+        for (int i = first; i < second; i++) {
+            setEmpty(xAxis, i);
+        }
+    }
+    
     /**
      * The randomwalk algorithm generates a cavern on the map. The algorithm 
      * starts from the middle of the level, and every loop cycle selects a

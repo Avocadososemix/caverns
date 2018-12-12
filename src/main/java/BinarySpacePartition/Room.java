@@ -55,6 +55,10 @@ public class Room {
         return new Room(x0()+1, getWidth()-1, y0()+1, getHeigth()-1);
     }
     
+    public Coordinates center() {
+        return new Coordinates(getWidth()/2, getHeigth()/2);
+    }
+    
     
     
     
