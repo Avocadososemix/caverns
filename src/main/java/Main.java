@@ -1,6 +1,4 @@
 
-import BinarySpacePartition.BinarySpacePartition;
-import GameLogic.Level;
 import javafx.application.Application;
 import java.io.IOException;
 import static javafx.application.Application.launch;
@@ -22,9 +20,9 @@ public class Main extends Application {
 
     /**
      * This method creates the Javafx panel for the program.
-     * 
+     *
      * @param primaryStage
-     * @throws IOException 
+     * @throws IOException
      */
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -37,10 +35,10 @@ public class Main extends Application {
 
     /**
      * Loads the FXML for the GUI, and returns it to the Scene setting method.
-     * 
+     *
      * @param PrimaryStage
      * @return
-     * @throws IOException 
+     * @throws IOException
      */
     private Parent setScene(Stage PrimaryStage) throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -50,12 +48,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        Level level = new Level(5,5); //testing
-        BinarySpacePartition part = new BinarySpacePartition(level.tiles);
-        char [][] rooms = part.generateRooms();
-        
-        //remove lines above and uncomment launch and launch import to test program
-        //launch(args);
+        launch(args);
     }
-
 }

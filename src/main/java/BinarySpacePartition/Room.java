@@ -5,6 +5,8 @@
  */
 package BinarySpacePartition;
 
+import GameLogic.Coordinates;
+
 /**
  * This is a class-type for Room-objects on the map.
  * 
@@ -12,47 +14,47 @@ package BinarySpacePartition;
  */
 public class Room {
     
-    private int xStart, xEnd;
-    private int yStart, yEnd;
+    private final Coordinates topCorner;
+    private final Coordinates botCorner;
 
-    public Room(int xStart, int xEnd, int yStart, int yEnd) {
-        this.xStart = xStart;
-        this.xEnd = xEnd;
-        this.yStart = yStart;
-        this.yEnd = yEnd;
+    public Room(Coordinates topCorner, Coordinates botCorner) {
+        this.topCorner = topCorner;
+        this.botCorner = botCorner;
+    }
+    
+    public Room(int x0, int x1, int y0, int y1) {
+        this.topCorner = new Coordinates(x0, x1);
+        this.botCorner = new Coordinates(y0, y1);
     }
 
-    public int getxStart() {
-        return xStart;
+    public Coordinates getTopLeftCorner() {
+        return topCorner;
     }
 
-    public void setxStart(int xStart) {
-        this.xStart = xStart;
+    public Coordinates getBotRightCorner() {
+        return botCorner;
+    }
+    
+    public int x0() {
+        return topCorner.getCoordX();
+    }
+    
+    public int getWidth() {
+        return botCorner.getCoordX();
     }
 
-    public int getxEnd() {
-        return xEnd;
+    public int y0() {
+        return topCorner.getCoordY();
     }
-
-    public void setxEnd(int xEnd) {
-        this.xEnd = xEnd;
+    
+    public int getHeigth() {
+        return botCorner.getCoordY();
     }
-
-    public int getyStart() {
-        return yStart;
+    
+    public Room dig() {
+        return new Room(x0()+1, getWidth()-1, y0()+1, getHeigth()-1);
     }
-
-    public void setyStart(int yStart) {
-        this.yStart = yStart;
-    }
-
-    public int getyEnd() {
-        return yEnd;
-    }
-
-    public void setyEnd(int yEnd) {
-        this.yEnd = yEnd;
-    }
+    
     
     
     

@@ -1,7 +1,6 @@
 package GameLogic;
 
-import BinarySpacePartition.BinarySpacePartition;
-import BinarySpacePartition.Rooms;
+import BinarySpacePartition.Room;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -61,6 +60,14 @@ public class Level {
         }
     }
     
+    public void fillSectionWithRooms(Room room) {
+        for (int i = 0; i < room.getHeigth(); i++) {
+            for (int j = 0; j < room.getWidth(); j++) {
+                setEmpty(j,i);
+            }
+        }
+    }
+    
     /**
      * The randomwalk algorithm generates a cavern on the map. The algorithm 
      * starts from the middle of the level, and every loop cycle selects a
@@ -94,11 +101,6 @@ public class Level {
             }
             setEmpty(middleX, middleY);
         }
-    }
-    
-    public  Rooms binarySpacePartition(int[][] tiles) {
-        BinarySpacePartition bsp = new BinarySpacePartition(tiles);
-        return ;
     }
 
     /**
