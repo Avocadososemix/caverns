@@ -58,6 +58,14 @@ public class Room {
     public Coordinates center() {
         return new Coordinates(getWidth()/2, getHeigth()/2);
     }
+
+    public void printInfo() {
+        System.out.println(x0() +", " +  getWidth() + ", " + y0() + ", " + getHeigth());
+    }
+    
+    public String toString() {
+        return x0() +", " +  getWidth() + ", " + y0() + ", " + getHeigth() + ".";
+    }
     
     
     

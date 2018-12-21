@@ -1,4 +1,6 @@
 
+import BinarySpacePartition.BinarySpacePartition;
+import GameLogic.Level;
 import javafx.application.Application;
 import java.io.IOException;
 import static javafx.application.Application.launch;
@@ -48,6 +50,15 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        launch(args);
+        Level test1 = new Level(30,30);
+        test1.fillWithWalls();
+        BinarySpacePartition BSP = new BinarySpacePartition(2);
+        BSP.generateBSP(test1).printLevel();
+        System.out.println("Done.");
+        System.exit(0);
+        
+        
+        
+        //launch(args);
     }
 }

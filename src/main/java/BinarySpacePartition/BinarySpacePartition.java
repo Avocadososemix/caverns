@@ -24,7 +24,7 @@ public class BinarySpacePartition {
     private Level level;
     private Room[] dugRooms;
 
-    public BinarySpacePartition(Level level, int timesSplit) {
+    public BinarySpacePartition(int timesSplit) {
         this.level = level;
         this.timesSplit = timesSplit;
         this.BSP_MinSplit = 30;
@@ -34,27 +34,41 @@ public class BinarySpacePartition {
     /**
      * This method initializes the process of applying binary space partitioning
      * to the level.
+     * @param level
+     * @return 
      */
-    public void generateBSP() {
-        connectRooms(splitLevel());
+    public Level generateBSP(Level level) {
+        this.level = level;
+        levelHeigth = level.getSizeY();
+        levelWidth = level.getSizeX();
+        ArrayList<Room[]> pair = splitLevel();
+        //level.printLevel();
+        connectRooms(pair);
+        System.out.println("....;....;....;....;....;....;");
+        return level;
     }
 
     /**
      * A level is partitioned into smaller and smaller pieces that will all
      * contains rooms. The
-     * 
-     * @return 
+     *
+     * @return
      */
     public ArrayList<Room[]> splitLevel() {
+        System.out.println("Beginning BSP");
         //A list is generated for mapRegions and the whole level is added as a room object.
-        PriorityQueue regionQueue = new PriorityQueue();
-        regionQueue.add(new Room(new Coordinates(0, 0), new Coordinates(level.getSizeX(), level.getSizeY())));
+//        PriorityQueue regionQueue = new PriorityQueue();
+//        regionQueue.add(new Room(new Coordinates(0, 0), new Coordinates(level.getSizeX(), level.getSizeY())));
         ArrayList<Room> regions = new ArrayList<>();
         ArrayList<Room[]> regionsPairs = new ArrayList<>();
-        regions.add(new Room(new Coordinates(0, 0), new Coordinates(level.getSizeX(), level.getSizeY())));
+        Room entireLevel = new Room(new Coordinates(0, 0), new Coordinates(level.getSizeX(), level.getSizeY()));
+        System.out.print("Level info: ");
+        entireLevel.printInfo();
+        regions.add(entireLevel);
         ArrayList<Room> tempList = regions;
         //Map space is divided
         for (int i = 0; i < timesSplit; i++) {
+            System.out.println("Generation #" + i + "**********************************");
             //tempList is cleared
             tempList = new ArrayList<>();
             //Selecting last regin in RegionList
@@ -63,37 +77,47 @@ public class BinarySpacePartition {
                 Room region1, region2;
                 //Choose split size randomly
                 int split = (int) ThreadLocalRandom.current().nextInt(BSP_MinSplit, BSP_MaxSplit + 1);
+                //System.out.println("Split value is " + split);
                 //If the split number is odd, split vertically
-                if ((timesSplit % 2) != 0) {
-                    int splitValue = (int) (levelWidth * split)/100;
+                if ((i % 2) != 0) {
+                    int splitValue = (int) ((region.getWidth() * split) / 100.0);
+                    System.out.println("Vertical split ratio is " + splitValue);
                     region1 = new Room(region.getTopLeftCorner(), new Coordinates(splitValue, region.getHeigth()));
+                    region1.printInfo();
                     region2 = new Room(new Coordinates(region1.x0() + region1.getWidth(), region.y0()),
                             new Coordinates(region.getWidth() - splitValue, region.getHeigth()));
+                    region2.printInfo();
                 } else {
                     //split horizontally
-                    int splitValue = (int) (levelHeigth * split)/100;
+                    int splitValue = (int) ((region.getHeigth() * split) / 100.0);
+                    System.out.println("Horizontal split ratio is " + splitValue);
                     region1 = new Room(region.getTopLeftCorner(), new Coordinates(region.getWidth(), splitValue));
+                    region1.printInfo();
                     region2 = new Room(new Coordinates(region.x0(), region1.y0() + region1.getHeigth()),
                             new Coordinates(region.getWidth(), region.getHeigth() - splitValue));
+                    region2.printInfo();
                 }
                 tempList.add(region1);
                 tempList.add(region2);
                 Room[] pair = new Room[]{region1, region2};
                 regionsPairs.add(pair);
             }
+            regions.addAll(tempList);
         }
         digRooms(tempList);
-        regions.addAll(tempList);
         return regionsPairs;
     }
 
     public void digRooms(ArrayList<Room> rooms) {
+        System.out.println("Digging " + rooms.size() + " rooms");
+        System.out.println(rooms);
         rooms.forEach((room) -> {
             level.fillSectionWithRooms(room.dig());
         });
     }
-    
+
     public void connectRooms(ArrayList<Room[]> roomPairs) {
-            level.connectRooms(roomPairs);
-        }
+        System.out.println("Connecting rooms");
+        level.connectRooms(roomPairs);
+    }
 }
