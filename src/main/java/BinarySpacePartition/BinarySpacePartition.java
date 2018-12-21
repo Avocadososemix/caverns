@@ -86,7 +86,7 @@ public class BinarySpacePartition {
                     System.out.println("Vertical split ratio is " + splitValue);
                     region1 = new Room(region.getTopLeftCorner(), new Coordinates(splitValue-1, region.getHeigth()));
                     region1.printInfo();
-                    region2 = new Room(new Coordinates(region1.x0() + region1.getWidth()+1, region.y0()),
+                    region2 = new Room(new Coordinates(region1.getWidth()+1, region.y0()),
                             new Coordinates(region.getWidth(), region.getHeigth()));
                     region2.printInfo();
                 } else {
@@ -95,7 +95,7 @@ public class BinarySpacePartition {
                     System.out.println("Horizontal split ratio is " + splitValue);
                     region1 = new Room(region.getTopLeftCorner(), new Coordinates(region.getWidth(), splitValue-1));
                     region1.printInfo();
-                    region2 = new Room(new Coordinates(region.x0(), region1.y0() + region1.getHeigth()+1),
+                    region2 = new Room(new Coordinates(region.x0(), region1.getHeigth()+1),
                             new Coordinates(region.getWidth(), region.getHeigth()));
                     region2.printInfo();
                 }
