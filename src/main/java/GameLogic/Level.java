@@ -61,20 +61,23 @@ public class Level {
     }
     
     public void fillSectionWithRooms(Room room) {
-        for (int i = 0; i < room.getHeigth(); i++) {
-            for (int j = 0; j < room.getWidth(); j++) {
-                setEmpty(j,i);
+        System.out.println("Room X:" + room.x0() + "-" + room.getWidth() + ",Y:" + room.y0() + "-" + room.getHeigth());
+        for (int i = room.y0(); i < room.getHeigth(); i++) {
+            for (int j = room.x0(); j < room.getWidth(); j++) {
+                setEmpty(i,j);
             }
         }
     }
     
     public void connectRooms(ArrayList<Room[]> roomPairs) {
+        System.out.println("RoomPairs: " + roomPairs.size());
         for (Room[] roomPair : roomPairs) {
             if (roomPair[0].center().getCoordY() == roomPair[1].center().getCoordY()) {
                 digTunnelX(roomPair[0].center(), roomPair[1].center());
             } else if (roomPair[0].center().getCoordX() == roomPair[1].center().getCoordX()){
                 digTunnelY(roomPair[0].center(), roomPair[1].center());
             } else {
+                System.out.println("Something went wrong");
                 return;
             }
         }

@@ -73,6 +73,8 @@ public class BinarySpacePartition {
             tempList = new ArrayList<>();
             //Selecting last regin in RegionList
             for (Room region : regions) {
+                System.out.print(regions.size() + " regions. Region being handled: ");
+                region.printInfo();
                 //initializing new Rooms
                 Room region1, region2;
                 //Choose split size randomly
@@ -82,19 +84,19 @@ public class BinarySpacePartition {
                 if ((i % 2) != 0) {
                     int splitValue = (int) ((region.getWidth() * split) / 100.0);
                     System.out.println("Vertical split ratio is " + splitValue);
-                    region1 = new Room(region.getTopLeftCorner(), new Coordinates(splitValue, region.getHeigth()));
+                    region1 = new Room(region.getTopLeftCorner(), new Coordinates(splitValue-1, region.getHeigth()));
                     region1.printInfo();
-                    region2 = new Room(new Coordinates(region1.x0() + region1.getWidth(), region.y0()),
-                            new Coordinates(region.getWidth() - splitValue, region.getHeigth()));
+                    region2 = new Room(new Coordinates(region1.x0() + region1.getWidth()+1, region.y0()),
+                            new Coordinates(region.getWidth(), region.getHeigth()));
                     region2.printInfo();
                 } else {
                     //split horizontally
                     int splitValue = (int) ((region.getHeigth() * split) / 100.0);
                     System.out.println("Horizontal split ratio is " + splitValue);
-                    region1 = new Room(region.getTopLeftCorner(), new Coordinates(region.getWidth(), splitValue));
+                    region1 = new Room(region.getTopLeftCorner(), new Coordinates(region.getWidth(), splitValue-1));
                     region1.printInfo();
-                    region2 = new Room(new Coordinates(region.x0(), region1.y0() + region1.getHeigth()),
-                            new Coordinates(region.getWidth(), region.getHeigth() - splitValue));
+                    region2 = new Room(new Coordinates(region.x0(), region1.y0() + region1.getHeigth()+1),
+                            new Coordinates(region.getWidth(), region.getHeigth()));
                     region2.printInfo();
                 }
                 tempList.add(region1);
@@ -102,6 +104,8 @@ public class BinarySpacePartition {
                 Room[] pair = new Room[]{region1, region2};
                 regionsPairs.add(pair);
             }
+            System.out.println("regions added " + tempList);
+            regions.clear();
             regions.addAll(tempList);
         }
         digRooms(tempList);
@@ -113,6 +117,9 @@ public class BinarySpacePartition {
         System.out.println(rooms);
         rooms.forEach((room) -> {
             level.fillSectionWithRooms(room.dig());
+            System.out.println("Digging " + room.dig());
+                    System.out.println("....;....;....;....;....;....;");
+                    level.printLevel();
         });
     }
 

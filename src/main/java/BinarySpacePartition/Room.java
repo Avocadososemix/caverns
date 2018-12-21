@@ -23,8 +23,8 @@ public class Room {
     }
     
     public Room(int x0, int x1, int y0, int y1) {
-        this.topCorner = new Coordinates(x0, x1);
-        this.botCorner = new Coordinates(y0, y1);
+        this.topCorner = new Coordinates(x0, y0);
+        this.botCorner = new Coordinates(x1, y1);
     }
 
     public Coordinates getTopLeftCorner() {

@@ -52,7 +52,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         Level test1 = new Level(30,30);
         test1.fillWithWalls();
-        BinarySpacePartition BSP = new BinarySpacePartition(2);
+        BinarySpacePartition BSP = new BinarySpacePartition(3);
         BSP.generateBSP(test1).printLevel();
         System.out.println("Done.");
         System.exit(0);
