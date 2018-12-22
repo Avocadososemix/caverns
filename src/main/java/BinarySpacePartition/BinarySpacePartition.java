@@ -23,9 +23,9 @@ public class BinarySpacePartition {
     private final int BSP_MinSplit, BSP_MaxSplit;
     private Level level;
     private Room[] dugRooms;
+    public double sectorShown0, sectorShown1;
 
     public BinarySpacePartition(int timesSplit) {
-        this.level = level;
         this.timesSplit = timesSplit;
         this.BSP_MinSplit = 30;
         this.BSP_MaxSplit = 70;
@@ -33,84 +33,65 @@ public class BinarySpacePartition {
 
     /**
      * This method initializes the process of applying binary space partitioning
-     * to the level.
+     * to the level. The SectorShown parameters define what is the size of the
+     * sector on which BSP is used on the level.
      * @param level
      * @return 
      */
     public Level generateBSP(Level level) {
         this.level = level;
+        sectorShown0 = 0.5;
+        sectorShown1 = 0.5;
         levelHeigth = level.getSizeY();
         levelWidth = level.getSizeX();
         ArrayList<Room[]> pair = splitLevel();
-        //level.printLevel();
         connectRooms(pair);
-//        System.out.println("....;....;....;....;....;....;");
         return level;
     }
 
     /**
-     * A level is partitioned into smaller and smaller pieces that will all
-     * contains rooms. The
+     * This class contains the Binary Space Partitioning logic. A level is
+     * partitioned into smaller and smaller pieces that will all
+     * contain rooms/empty space. Bisected regions are saved as Region-pairs,
+     * which are later used to create tunnels that connect the rooms.
      *
      * @return
      */
     public ArrayList<Room[]> splitLevel() {
-//        System.out.println("Beginning BSP");
-        //A list is generated for mapRegions and the whole level is added as a room object.
-//        PriorityQueue regionQueue = new PriorityQueue();
-//        regionQueue.add(new Room(new Coordinates(0, 0), new Coordinates(level.getSizeX(), level.getSizeY())));
         ArrayList<Room> regions = new ArrayList<>();
         ArrayList<Room[]> regionsPairs = new ArrayList<>();
         Room entireLevel = new Room(new Coordinates(0, 0), new Coordinates(level.getSizeX(), level.getSizeY()));
-//        System.out.print("Level info: ");
-//        entireLevel.printInfo();
         regions.add(entireLevel);
         ArrayList<Room> tempList = regions;
         //Map space is divided
         for (int i = 0; i < timesSplit; i++) {
-//            System.out.println("Generation #" + i + "**********************************");
-            //tempList is cleared
             tempList = new ArrayList<>();
-            //Selecting last regin in RegionList
+            //Selecting last region in RegionList
             for (Room region : regions) {
-//                System.out.print(regions.size() + " regions. Region being handled: ");
-//                region.printInfo();
                 //initializing new Rooms
                 Room region1, region2;
                 //Choose split size randomly
                 int split = (int) ThreadLocalRandom.current().nextInt(BSP_MinSplit, BSP_MaxSplit + 1);
-                //System.out.println("Split value is " + split);
                 //If the split number is odd, split vertically
                 if ((i % 2) != 0) {
                     int splitValue = (int) (((region.getWidth()-region.x0()) * split) / 100.0);
-//                    System.out.println("Vertical split ratio is " + splitValue);
                     region1 = new Room(region.getTopLeftCorner(), new Coordinates(region.getTopLeftCorner().getCoordX()
-                            + splitValue, region.getHeigth()));   //removed -1 from splitValue
-//                    region1.printInfo();
-//                    region1.orderTest();
-                    region2 = new Room(new Coordinates(region1.getWidth(), region.y0()), //removed +1 from .getWidth
+                            + splitValue, region.getHeigth()));   //change this to change room wall thickness
+                    region2 = new Room(new Coordinates(region1.getWidth(), region.y0()), //change this to change room wall thickness
                             new Coordinates(region.getWidth(), region.getHeigth()));
-//                    region2.printInfo();
-//                    region2.orderTest();
                 } else {
                     //split horizontally
                     int splitValue = (int) (((region.getHeigth()-region.y0()) * split) / 100.0);
-//                    System.out.println("Horizontal split ratio is " + splitValue);
                     region1 = new Room(region.getTopLeftCorner(), new Coordinates(region.getWidth(),
-                            region.getTopLeftCorner().getCoordY() + splitValue)); //removed -1 from splitValue
-//                    region1.printInfo();
-//                    region1.orderTest();
-                    region2 = new Room(new Coordinates(region.x0(), region1.getHeigth()), //removed +1 from getHeigth()
+                            region.getTopLeftCorner().getCoordY() + splitValue)); //change this to change room wall thickness
+                    region2 = new Room(new Coordinates(region.x0(), region1.getHeigth()), //change this to change room wall thickness
                             new Coordinates(region.getWidth(), region.getHeigth()));
-//                    region2.printInfo();
-//                    region2.orderTest();
                 }
                 tempList.add(region1);
                 tempList.add(region2);
                 Room[] pair = new Room[]{region1, region2};
                 regionsPairs.add(pair);
             }
-//            System.out.println("regions added " + tempList);
             regions.clear();
             regions.addAll(tempList);
         }
@@ -118,21 +99,30 @@ public class BinarySpacePartition {
         return regionsPairs;
     }
 
+    /**
+     * All the rooms generated by the BSP are added into the level with this class.
+     * The class also sets the boundaries for BSP to preserve some of the level
+     * from being room simply rooms.
+     * @param rooms 
+     */
     public void digRooms(ArrayList<Room> rooms) {
-//        System.out.println("Digging " + rooms.size() + " rooms");
-//        System.out.println(rooms);
         Coordinates topLeft = new Coordinates(0,0);
-        Coordinates botRight = new Coordinates((int) Math.floor(levelWidth*0.5), (int) Math.floor(levelHeigth*0.5));
+        Coordinates botRight = new Coordinates((int) Math.floor(levelWidth*sectorShown0),
+                (int) Math.floor(levelHeigth*sectorShown1));
         rooms.forEach((room) -> {
             level.fillSectionWithRooms(room.dig(), topLeft, botRight);
-//            System.out.println("Digging " + room.dig());
-//                    System.out.println("....;....;....;....;....;....;");
-//                    level.printLevel();
         });
     }
 
+    /**
+     * This class calls the connectRooms method in the level being processed,
+     * adding tunnels that connect room pairs. Rooms are connected from their
+     * centers to their opposing pairs. Rooms that were generated by the BSP-algorithm
+     * during its recursive loops were still saved as room pairs to generate
+     * additional crisscrossing corridors that connect all the rooms in the level.
+     * @param roomPairs 
+     */
     public void connectRooms(ArrayList<Room[]> roomPairs) {
-//        System.out.println("Connecting rooms");
         level.connectRooms(roomPairs);
     }
 }
