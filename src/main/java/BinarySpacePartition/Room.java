@@ -56,7 +56,17 @@ public class Room {
     }
     
     public Coordinates center() {
-        return new Coordinates(getWidth()/2, getHeigth()/2);
+        return new Coordinates(x0()+(getWidth()-x0())/2, y0()+(getHeigth()-y0())/2);
+    }
+    
+    public void printCenter() {
+        System.out.println("Center- X:" + center().getCoordX() + ",Y:" + center().getCoordY());
+    }
+    
+    public void orderTest() {
+        if (getWidth()<x0() || getHeigth()<y0()) {
+            System.out.println("This is wrong!!!!!!!!!");
+        }
     }
 
     public void printInfo() {

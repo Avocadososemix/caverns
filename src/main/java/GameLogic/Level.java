@@ -72,6 +72,10 @@ public class Level {
     public void connectRooms(ArrayList<Room[]> roomPairs) {
         System.out.println("RoomPairs: " + roomPairs.size());
         for (Room[] roomPair : roomPairs) {
+            System.out.print("Room centers:");
+            roomPair[0].printCenter();
+            roomPair[1].printCenter();
+            System.out.println("\n____________");
             if (roomPair[0].center().getCoordY() == roomPair[1].center().getCoordY()) {
                 digTunnelX(roomPair[0].center(), roomPair[1].center());
             } else if (roomPair[0].center().getCoordX() == roomPair[1].center().getCoordX()){
@@ -90,11 +94,12 @@ public class Level {
             first = coord1.getCoordX();
             second = coord2.getCoordX();
         } else {
-            second = coord1.getCoordX();
             first = coord2.getCoordX();
+            second = coord1.getCoordX();
         }
-        for (int i = first; i < second; i++) {
-            setEmpty(i, yAxis);
+        System.out.println("Horizontal from " + first + " to " + second);
+        for (int i = first; i <= second; i++) {
+            setCorridor(i, yAxis);
         }
     }
     
@@ -105,11 +110,12 @@ public class Level {
             first = coord1.getCoordY();
             second = coord2.getCoordY();
         } else {
-            second = coord1.getCoordY();
             first = coord2.getCoordY();
+            second = coord1.getCoordY();
         }
+            System.out.println("Vertical from " + first + " to " + second);
         for (int i = first; i < second; i++) {
-            setEmpty(xAxis, i);
+            setCorridor(xAxis, i);
         }
     }
     
@@ -168,6 +174,11 @@ public class Level {
     public void setEmpty(int coordX, int coordY) {
         //System.out.println("Setting square " + coordX + ", " + coordY + " empty. Max is " + sizeX + ", " +sizeY);
         tiles[coordX][coordY].setSymbol('.');
+        tiles[coordX][coordY].setPassable(true);
+    }
+    
+    public void setCorridor(int coordX, int coordY) {
+        tiles[coordX][coordY].setSymbol('c');
         tiles[coordX][coordY].setPassable(true);
     }
 

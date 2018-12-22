@@ -84,20 +84,26 @@ public class BinarySpacePartition {
                 if ((i % 2) != 0) {
                     int splitValue = (int) ((region.getWidth() * split) / 100.0);
                     System.out.println("Vertical split ratio is " + splitValue);
-                    region1 = new Room(region.getTopLeftCorner(), new Coordinates(splitValue-1, region.getHeigth()));
+                    region1 = new Room(region.getTopLeftCorner(), new Coordinates(region.getTopLeftCorner().getCoordX()
+                            + splitValue-1, region.getHeigth()));
                     region1.printInfo();
+                    region1.orderTest();
                     region2 = new Room(new Coordinates(region1.getWidth()+1, region.y0()),
                             new Coordinates(region.getWidth(), region.getHeigth()));
                     region2.printInfo();
+                    region2.orderTest();
                 } else {
                     //split horizontally
-                    int splitValue = (int) ((region.getHeigth() * split) / 100.0);
+                    int splitValue = (int) (((region.getHeigth()-region.y0()) * split) / 100.0);
                     System.out.println("Horizontal split ratio is " + splitValue);
-                    region1 = new Room(region.getTopLeftCorner(), new Coordinates(region.getWidth(), splitValue-1));
+                    region1 = new Room(region.getTopLeftCorner(), new Coordinates(region.getWidth(),
+                            region.getTopLeftCorner().getCoordY() + splitValue-1));
                     region1.printInfo();
+                    region1.orderTest();
                     region2 = new Room(new Coordinates(region.x0(), region1.getHeigth()+1),
                             new Coordinates(region.getWidth(), region.getHeigth()));
                     region2.printInfo();
+                    region2.orderTest();
                 }
                 tempList.add(region1);
                 tempList.add(region2);
