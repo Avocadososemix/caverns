@@ -15,6 +15,7 @@ Run the project with `gradle run`.
 ## Links to documentation
 
 [Control Scheme](documentation/controls.md)  
+[Level Generation Algorithms](algorithms.md)  
 [Requirements/Määrittelydokumentti](documentation/requirements.md)  
 [Design Document/Toteutusdokumentti](documentation/design_document.md)  
 [Testing Document/Testausdokumentti](documentation/testing_document.md)
