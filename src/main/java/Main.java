@@ -50,15 +50,17 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        Level test1 = new Level(40,40);
-        test1.fillWithWalls();
-        BinarySpacePartition BSP = new BinarySpacePartition(3);
-        BSP.generateBSP(test1).printLevel();
-        System.out.println("Done.");
-        System.exit(0);
+//        Level test1 = new Level(150,150);
+//        test1.fillWithWalls();
+//        BinarySpacePartition BSP = new BinarySpacePartition(8);
+//        test1 = BSP.generateBSP(test1);
+//        test1.randomWalk();
+//        test1.printLevel();
+//        System.out.println("Done.");
+//        System.exit(0);
         
         
         
-        //launch(args);
+        launch(args);
     }
 }

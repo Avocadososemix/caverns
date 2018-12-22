@@ -66,6 +66,7 @@ public class Room {
     public void orderTest() {
         if (getWidth()<x0() || getHeigth()<y0()) {
             System.out.println("This is wrong!!!!!!!!!");
+            System.exit(0);
         }
     }
 

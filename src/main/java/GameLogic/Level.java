@@ -60,30 +60,35 @@ public class Level {
         }
     }
     
-    public void fillSectionWithRooms(Room room) {
-        System.out.println("Room X:" + room.x0() + "-" + room.getWidth() + ",Y:" + room.y0() + "-" + room.getHeigth());
+    public void fillSectionWithRooms(Room room, Coordinates topLeft, Coordinates botRight) {
+        int x0 = topLeft.getCoordX();
+        int x1 = botRight.getCoordX();
+        int y0 = topLeft.getCoordY();
+        int y1 = botRight.getCoordY();
+//        System.out.println("Room X:" + room.x0() + "-" + room.getWidth() + ",Y:" + room.y0() + "-" + room.getHeigth());
         for (int i = room.y0(); i < room.getHeigth(); i++) {
-            for (int j = room.x0(); j < room.getWidth(); j++) {
+            for (int j = room.x0(); j < room.getWidth(); j++) 
+                if (i<y0 || i>y1 || j<x0 || j>x1) {     
                 setEmpty(i,j);
             }
         }
     }
     
     public void connectRooms(ArrayList<Room[]> roomPairs) {
-        System.out.println("RoomPairs: " + roomPairs.size());
+//        System.out.println("RoomPairs: " + roomPairs.size());
         for (Room[] roomPair : roomPairs) {
-            System.out.print("Room centers:");
-            roomPair[0].printCenter();
-            roomPair[1].printCenter();
-            System.out.println("\n____________");
+//            System.out.print("______________\nRoom centers:\n");
+//            roomPair[0].printCenter();
+//            roomPair[1].printCenter();
             if (roomPair[0].center().getCoordY() == roomPair[1].center().getCoordY()) {
                 digTunnelX(roomPair[0].center(), roomPair[1].center());
             } else if (roomPair[0].center().getCoordX() == roomPair[1].center().getCoordX()){
                 digTunnelY(roomPair[0].center(), roomPair[1].center());
-            } else {
-                System.out.println("Something went wrong");
+            } 
+//            else {
+//                System.out.println("Something went wrong");
                 return;
-            }
+//            }
         }
     }
     
@@ -97,14 +102,15 @@ public class Level {
             first = coord2.getCoordX();
             second = coord1.getCoordX();
         }
-        System.out.println("Horizontal from " + first + " to " + second);
+//        System.out.println("Horizontal from " + first + " to " + second);
         for (int i = first; i <= second; i++) {
-            setCorridor(i, yAxis);
+            setEmpty(yAxis, i);
         }
     }
     
         public void digTunnelY(Coordinates coord1, Coordinates coord2) {
         int xAxis = coord1.getCoordX();
+//            System.out.println("Digging on X-axis:" + xAxis);
         int first, second;
         if (coord1.getCoordY()<coord2.getCoordY()) {
             first = coord1.getCoordY();
@@ -113,9 +119,9 @@ public class Level {
             first = coord2.getCoordY();
             second = coord1.getCoordY();
         }
-            System.out.println("Vertical from " + first + " to " + second);
+//            System.out.println("Vertical from " + first + " to " + second);
         for (int i = first; i < second; i++) {
-            setCorridor(xAxis, i);
+            setEmpty(i, xAxis);
         }
     }
     

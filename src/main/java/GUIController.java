@@ -1,8 +1,11 @@
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import BinarySpacePartition.BinarySpacePartition;
 import GameLogic.Character;
 import GameLogic.Level;
 import java.net.URL;
@@ -23,7 +26,7 @@ import javafx.scene.text.Font;
  */
     public class GUIController implements Initializable {
 
-    private final Level starter;
+    private Level starter;
     private final Character player;
     private String statusMessage;
 
@@ -65,8 +68,10 @@ import javafx.scene.text.Font;
     public GUIController() {
         starter = new Level(80, 80); //creating a new level
         starter.fillWithWalls(); //filling level with walls
-        starter.randomWalk(); //creating a random cavern
-        starter.randomWalk(); //creating a random cavern
+        BinarySpacePartition BSP = new BinarySpacePartition(6);
+        starter = BSP.generateBSP(starter);
+        //starter.randomWalk(); //creating a random cavern
+        //starter.randomWalk(); //creating a random cavern
         starter.randomWalk(); //creating a random cavern
         player = new Character(40,40);
         starter.addCharacter(player); //adding the player character to the level
